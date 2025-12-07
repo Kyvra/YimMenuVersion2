@@ -71,30 +71,43 @@ namespace YimMenu::Submenus
 	static StatInfo GetStatInfo(std::string_view name_str)
 	{
 		StatInfo name{};
-		name.m_Name = name_str;
-		if (std::string_view(name.m_Name).starts_with('$'))
+
+		// It is known that the shortest statistical data is:
+		// SM_TRI,int
+		if (name_str.size() <= 5)
+			return name;
+
+		std::string name_upper(name_str);
+
+		std::transform(name_upper.begin(), name_upper.end(), name_upper.begin(), [](unsigned char c) {
+			return std::toupper(c);
+		});
+
+		if (name_upper.starts_with('$'))
 		{
-			name.m_Name.erase(0, 1);
+			name_upper.erase(0, 1);	
 			name.m_Normalized = true;
 		}
-		if (std::string_view(name.m_Name).starts_with("MPX"))
+
+		if (name_upper.starts_with("MPX"))
 		{
 			auto last_char = Pointers.StatsMgr->GetStat("MPPLY_LAST_MP_CHAR"_J);
 			auto char_index = last_char ? last_char->GetInt() : 0;
-			name.m_Name.replace(0, 3, "MP" + std::to_string(char_index));
+			name_upper.replace(2, 1, std::to_string(char_index));
 			name.m_Normalized = true;
 		}
-		else if (std::string_view(name.m_Name).starts_with("SPX"))
+		else if (name_upper.starts_with("SPX"))
 		{
-			// func_174() Global_1574927 online is 145
+			//func_174() Global_1574927 online is 145
 			auto char_index = *ScriptGlobal(114370).At(2367).At(539).At(4321).As<int*>();
-			if (char_index == 0 || char_index == 1 || char_index == 2)
+			if (char_index >= 0 && char_index <= 2)
 			{
-				name.m_Name.replace(0, 3, "SP" + std::to_string(char_index));
+				name_upper.replace(2, 1, std::to_string(char_index));
 				name.m_Normalized = true;
 			}
 		}
 
+		name.m_Name = std::move(name_upper);
 		name.m_NameHash = Joaat(name.m_Name);
 		name.m_Data = Pointers.StatsMgr->GetStat(name.m_NameHash);
 		return name;
@@ -232,7 +245,7 @@ namespace YimMenu::Submenus
 				return tolower(c);
 			});
 
-			if (as_string != "false" || as_string != "0")
+			if (as_string != "false" && as_string != "0")
 			{
 				_bool = true;
 			}
@@ -282,14 +295,21 @@ namespace YimMenu::Submenus
 			return;
 		case sStatData::Type::DATE:
 		{
-			std::string input = value.data();
-			std::vector<int> date;
-			std::stringstream ss(input);
+			std::stringstream ss(value.data());
 			std::string token;
-			date.clear();
+			std::vector<int> date;
+			date.reserve(7);
+
 			while (std::getline(ss, token, ','))
 			{
-				date.emplace_back(std::stoi(token));
+				try
+				{
+					date.emplace_back(std::stoi(token));
+				}
+				catch (...)
+				{
+					date.emplace_back(0);
+				}
 			}
 
 			if (date.size() == 7)
@@ -312,14 +332,21 @@ namespace YimMenu::Submenus
 			return;
 		case sStatData::Type::POS:
 		{
-			std::string input = value.data();
-			std::vector<float> pos;
-			std::stringstream ss(input);
+			std::stringstream ss( value.data());
 			std::string token;
-			pos.clear();
+			std::vector<float> pos;
+			pos.reserve(3);
+
 			while (std::getline(ss, token, ','))
 			{
-				pos.emplace_back(std::stof(token));
+				try
+				{
+					pos.emplace_back(std::stof(token));
+				}
+				catch (...)
+				{
+					pos.emplace_back(0.0f);
+				}
 			}
 			if (pos.size() == 3)
 			{
@@ -455,7 +482,7 @@ namespace YimMenu::Submenus
 		}
 	}
 
-	void Cmp_Packed_To_Flie(int start, int end,packed_vec& packed_vecs, bool compare)
+	void CmpPackedToFlie(int start, int end, packed_vec& packed_vecs, bool compare)
 	{
 		if (!compare)
 		{
@@ -507,7 +534,7 @@ namespace YimMenu::Submenus
 		}
 	}
 
-	void Cmp_Stat_To_Flie(stats_vec& stats_vecs, bool compare)
+	void CmpStatToFlie(stats_vec& stats_vecs, bool compare)
 	{
 		StatInfo current_info;
 		StatValue read_value;
@@ -533,15 +560,14 @@ namespace YimMenu::Submenus
 				size_t pos = line.find(',');
 				if (pos != std::string::npos)
 				{
-					std::string key = line.substr(0, pos);
-
-					current_info = GetStatInfo(key);
-					if (current_info.IsValid())
-					{
-						oldvalue = ReadStat(current_info.m_NameHash, read_value, current_info.m_Data);
-						/*if (oldvalue != "")*/
-						stats_vecs.emplace_back(key, oldvalue);
-					}
+					line = line.substr(0, pos);
+				}
+				current_info = GetStatInfo(line);
+				if (current_info.IsValid())
+				{
+					oldvalue = ReadStat(current_info.m_NameHash, read_value, current_info.m_Data);
+					/*if (oldvalue != "")*/
+					stats_vecs.emplace_back(line, oldvalue);
 				}
 			}
 			stats_vecs.shrink_to_fit();
@@ -599,7 +625,7 @@ namespace YimMenu::Submenus
 			static StatValue value{};
 
 			ImGui::SetNextItemWidth(300.f);
-			if (ImGui::InputText("Name", &stat_buf, ImGuiInputTextFlags_CharsUppercase))
+			if (ImGui::InputText("Name", &stat_buf, ImGuiInputTextFlags_CharsUppercase | ImGuiInputTextFlags_CharsNoBlank))
 			{
 				current_info = GetStatInfo(stat_buf);
 				if (current_info.IsValid())
@@ -720,12 +746,12 @@ namespace YimMenu::Submenus
 			if (!NativeInvoker::AreHandlersCached())
 				return ImGui::TextDisabled("Natives not cached yet");
 
-			static packed_vec packed_vec;
+			static packed_vec packed_vec_;
 			static bool create_pac_b = false;
 			if (ImGui::Button("Create packed to save"))
 			{
 				FiberPool::Push([] {
-					Cmp_Packed_To_Flie(1, 54820, packed_vec, false);
+					CmpPackedToFlie(1, 54820, packed_vec_, false);
 					create_pac_b = true;
 				});
 			}
@@ -737,7 +763,7 @@ namespace YimMenu::Submenus
 			if (ImGui::Button("Compared to the last time##packed"))
 			{
 				FiberPool::Push([] {
-					Cmp_Packed_To_Flie(1, 54820, packed_vec, true);
+					CmpPackedToFlie(1, 54820, packed_vec_, true);
 				});
 			}
 		}));
@@ -745,14 +771,14 @@ namespace YimMenu::Submenus
 		stats_compare->AddItem(std::make_unique<ImGuiItem>([] {
 			if (!NativeInvoker::AreHandlersCached())
 				return ImGui::TextDisabled("Natives not cached yet");
-			
-			static stats_vec stat_vec;
+
+			static stats_vec stats_vec_;
 			static bool create_stat_b = false;
 
 			if (ImGui::Button("Create stats to save"))
 			{
 				FiberPool::Push([] {
-					Cmp_Stat_To_Flie(stat_vec, false);
+					CmpStatToFlie(stats_vec_, false);
 					create_stat_b = true;
 				});
 			}
@@ -763,7 +789,7 @@ namespace YimMenu::Submenus
 			if (ImGui::Button("Compared to the last time##stats"))
 			{
 				FiberPool::Push([] {
-					Cmp_Stat_To_Flie(stat_vec, true);
+					CmpStatToFlie(stats_vec_, true);
 				});
 			}
 		}));
