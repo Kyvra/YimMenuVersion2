@@ -112,14 +112,16 @@ namespace YimMenu
 	{
 		ImFontConfig FontCfg{};
 		FontCfg.FontDataOwnedByAtlas = false;
-		FontCfg.MergeMode = true;
 
-		auto font = io.Fonts->AddFontFromMemoryTTF(const_cast<std::uint8_t*>(Fonts::MainFont), sizeof(Fonts::MainFont), size, &FontCfg);
+		auto font = io.Fonts->AddFontFromMemoryTTF(const_cast<std::uint8_t*>(Fonts::MainFont), sizeof(Fonts::MainFont), size, &FontCfg, io.Fonts->GetGlyphRangesDefault());
 
 		// just use Arial for Cyrillic
-		io.Fonts->AddFontFromFileTTF((std::filesystem::path(std::getenv("SYSTEMROOT")) / "Fonts" / "arial.ttf").string().c_str(), size, &FontCfg);
-		
+
+		FontCfg.MergeMode = true;
+		io.Fonts->AddFontFromFileTTF((std::filesystem::path(std::getenv("SYSTEMROOT")) / "Fonts" / "arial.ttf").string().c_str(), size, &FontCfg, GetGlyphRangesCyrillicOnly());
+
 		io.Fonts->Build();
+
 		return font;
 	}
 
@@ -132,18 +134,17 @@ namespace YimMenu
 		IO.LogFilename = NULL;
 		ImFontConfig FontCfg{};
 		FontCfg.FontDataOwnedByAtlas = false;
-		
+
 		IO.Fonts->Clear();
-		FontCfg.MergeMode = true;
-
-		//Starting from version 1.92, it comes with the latest backend and does not require a specified font range.
 		Menu::Font::g_DefaultFont = CreateFontWithCyrillicSupport(IO, Menu::Font::g_DefaultFontSize);
-		Menu::Font::g_AwesomeFont = IO.Fonts->AddFontFromMemoryTTF(const_cast<std::uint8_t*>(Fonts::IconFont), sizeof(Fonts::IconFont), Menu::Font::g_AwesomeFontSize, &FontCfg);
-		
+		Menu::Font::g_OptionsFont = CreateFontWithCyrillicSupport(IO, Menu::Font::g_OptionsFontSize);
+		Menu::Font::g_ChildTitleFont = CreateFontWithCyrillicSupport(IO, Menu::Font::g_ChildTitleFontSize);
+		Menu::Font::g_ChatFont = CreateFontWithCyrillicSupport(IO, Menu::Font::g_ChatFontSize);
+		Menu::Font::g_OverlayFont = CreateFontWithCyrillicSupport(IO, Menu::Font::g_OverlayFontSize);
+		static const ImWchar full_range[] = {0x0020, 0xFFFF, 0};
+		Menu::Font::g_AwesomeFont = IO.Fonts->AddFontFromMemoryTTF(const_cast<std::uint8_t*>(Fonts::IconFont), sizeof(Fonts::IconFont), Menu::Font::g_AwesomeFontSize, &FontCfg, full_range);
 
-		if (!IO.Fonts->IsBuilt())
-			IO.Fonts->Build();
-		UIManager::SetOptionsFont(Menu::Font::g_DefaultFont);
+		UIManager::SetOptionsFont(Menu::Font::g_OptionsFont);
 		Renderer::SetFontsUpdated();
 	}
 }
