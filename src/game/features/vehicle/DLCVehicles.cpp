@@ -27,9 +27,7 @@ namespace YimMenu::Features
 
     if (!m_BuyVehiclePatch)
     {
-        m_BuyVehiclePatch = ScriptPatches::AddPatch("appinternet"_J,
-            ScriptPointer("BuyVehiclePatch", "5D ? ? ? 06 56 ? ? 38 00 25 ? 50").Add(5),
-            {0x55});
+        m_BuyVehiclePatch = ScriptPatches::AddPatch("appinternet"_J, ScriptPointer("BuyVehiclePatch", "5D ? ? ? 06 56 ? ? 38 00 25 ? 50").Add(5), {0x55});
   	  }
   		  m_BuyVehiclePatch->Enable();
 	}
