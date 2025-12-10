@@ -935,6 +935,13 @@ namespace YimMenu
 	    "suzume"_J,
 	    "tampa4"_J,
 	    "woodlander"_J,
+        "astrale"_J,
+        "driftdominator9"_J,
+        "driftkeiora"_J,
+        "drift3000"_J,
+        "driftsentinel2"_J,
+        "fmj2"_J,
+        "gtr750"_J,
 	});
 
 }
