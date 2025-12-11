@@ -54,7 +54,7 @@ namespace YimMenu::Features
 	static void SetAllDailyActivitiesCompleted(bool completed)
 	{
 		Stats::SetPackedBool(36628, completed); // G's Cache
-		Stats::SetPackedBool(36657, completed); // Stash House
+		Stats::SetPackedBool(32413, completed); // Stash House completion
 		Stats::SetPackedBool(31734, completed); // Shipwreck
 		Stats::SetPackedBool(30297, completed); // Hidden Cache 1
 		Stats::SetPackedBool(30298, completed); // Hidden Cache 2
