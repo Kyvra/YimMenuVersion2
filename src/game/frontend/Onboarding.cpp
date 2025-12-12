@@ -40,13 +40,13 @@ namespace YimMenu
 			ImGui::RadioButton("Play with everyone (Broken!)", &value, 1);
 			ImGui::TextWrapped("%s",
 			    "You can always change your choice by toggling Network > Spoofing > Join YimMenu-only Sessions. Our official repository is at "
-			    "https://github.com/YimMenu/YimMenuV2. Make sure to only download the menu from GitHub to avoid malware. "
+			    "https://github.com/CSY0N/YimMenuVersion2. Make sure to only download the menu from GitHub to avoid malware. "
 			    "You can use the repository to report bugs, suggest features, and contribute by making pull requests. We also have a "
 			    "Matrix server that can be found at https://matrix.to/#/#yimmenu:matrix.org for faster communication with developers "
 			    "and other users. Matrix is a free and open source alternative to Discord, and creating an account is safe and easy");
 			if (ImGui::Button("Open GitHub"))
 			{
-				ShellExecuteA(NULL, "open", "https://github.com/YimMenu/YimMenuV2", NULL, NULL, SW_SHOWNORMAL);
+				ShellExecuteA(NULL, "open", "https://github.com/CSY0N/YimMenuVersion2", NULL, NULL, SW_SHOWNORMAL);
 			}
 			ImGui::SameLine();
 			if (ImGui::Button("Open Matrix server"))
