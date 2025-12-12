@@ -169,6 +169,8 @@ namespace YimMenu
 		PVOID MatchmakingSessionDetailSendResponse;
 		PVOID GetLabelText;
 		PVOID GetLabelTextInternal;
+        uint32_t* m_frame_count{};
+        int* m_game_state = nullptr;
 	};
 
 	struct Pointers : PointerData
