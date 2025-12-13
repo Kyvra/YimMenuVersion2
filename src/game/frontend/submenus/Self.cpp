@@ -48,6 +48,7 @@ namespace YimMenu::Submenus
 		setWanted->AddItem(std::make_shared<BoolCommandItem>("freezewanted"_J));
 		wantedGroup->AddItem(std::make_shared<ConditionalItem>("freezewanted"_J, clearWanted, true));
 		wantedGroup->AddItem(std::make_shared<ConditionalItem>("neverwanted"_J, setWanted, true));
+		clearWanted->AddItem(std::make_shared<ConditionalItem>("neverwanted"_J,std::make_shared<BoolCommandItem>("alwayswanted"_J),true));
 
 		movementGroup->AddItem(std::make_shared<BoolCommandItem>("standonvehicles"_J));
 		movementGroup->AddItem(std::make_shared<BoolCommandItem>("disableactionmode"_J));
