@@ -327,25 +327,25 @@ namespace YimMenu::Features
 		};
 
 		class InstantFinish : public Command
-		{
-			using Command::Command;
+        {
+            using Command::Command;
 
-			virtual void OnCall() override
-			{
-				if (auto thread = Scripts::FindScriptThread("fm_mission_controller"_J))
-				{
-					Scripts::ForceScriptHost(thread);
-					ScriptMgr::Yield(500ms);
+            virtual void OnCall() override
+            {
+                if (auto thread = Scripts::FindScriptThread("fm_mission_controller"_J))
+                {
+                    Scripts::ForceScriptHost(thread);
+                    ScriptMgr::Yield(500ms);
 
-					*ScriptLocal(thread, 20391).At(1740).At(0, 1).As<int*>() = 80;
-					*ScriptLocal(thread, 20391).At(2686).As<int*>() = 4443220;
-					*ScriptLocal(thread, 20391).At(1062).As<int*>() = 5;
-					*ScriptLocal(thread, 20391).As<int*>() = 12;
-					*ScriptLocal(thread, 29011).At(0, 1).As<int*>() = 99999;
-					*ScriptLocal(thread, 32467).At(0, 294).At(68).As<int*>() = 99999;
-				}
-			}
-		};
+                    *ScriptLocal(thread, 20395).At(1740).At(0, 1).As<int*>() = 80;
+                    *ScriptLocal(thread, 20395).At(2686).As<int*>() = 4443220;
+                    *ScriptLocal(thread, 20395).At(1062).As<int*>() = 5;
+                    *ScriptLocal(thread, 20395).As<int*>() = 12;
+                    *ScriptLocal(thread, 29016).At(0, 1).As<int*>() = 99999;
+                    *ScriptLocal(thread, 32472).At(0, 294).At(68).As<int*>() = 99999;
+                }
+            }
+        };
 
 		static SetCuts _DiamondCasinoHeistSetCuts{"diamondcasinoheistsetcuts", "Set Cuts", "Sets heist cut"};
 		static ForceReady _DiamondCasinoHeistForceReady{"diamondcasinoheistforceready", "Force Ready", "Forces all players to be ready"};
