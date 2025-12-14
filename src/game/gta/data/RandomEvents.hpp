@@ -23,7 +23,10 @@ namespace YimMenu
 	    "Possessed Animals",
 	    "Ghosts Exposed",
 	    "Happy Holidays Hauler",
-	    "Community Outreach"});
+	    "Community Outreach",
+	    "Getaway Driver",
+	    "Stoner Survival",
+	    "Valentine Cheater"});
 
 	static constexpr auto randomEventScripts = std::to_array({"fm_content_drug_vehicle"_J,
 	    "fm_content_movie_props"_J,
