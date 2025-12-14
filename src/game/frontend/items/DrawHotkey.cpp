@@ -28,7 +28,7 @@ namespace YimMenu
 		}
 		else
 		{
-			ImGui::PushItemWidth(35);
+			ImGui::PushItemWidth(85);
 			int i = 0;
 			for (auto key : link->m_Chain)
 			{
