@@ -38,7 +38,7 @@ namespace YimMenu::Features
 
 			virtual void OnCall() override
 			{
-				auto base = ScriptGlobal(1977593);
+				auto base = ScriptGlobal(1977594);
 
 				for (int i = 0; i <= 3; i++)
 				{
