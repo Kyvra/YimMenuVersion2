@@ -1,0 +1,246 @@
+#include "core/commands/Command.hpp"
+#include "game/gta/Natives.hpp"
+#include "core/frontend/Notifications.hpp"
+#include "game/gta/Stats.hpp"
+
+namespace YimMenu::Features
+{
+	class UnlockCareerProgress : public Command
+	{
+		using Command::Command;
+
+		virtual void OnCall() override
+		{
+			if (*Pointers.IsSessionStarted)
+			{
+				Stats::SetInt("MPX_PROG_HUB_KNOWAY_EARNINGS", 5000000);
+				Stats::SetPackedBool(54773, 54786);
+				Stats::SetPackedBool(54653, true);
+				Stats::SetInt("MPX_SB_CAR_WASH_OWNED", 1);
+				Stats::SetInt("MPX_SB_HELI_TOURS_OWNED", 1);
+				Stats::SetInt("MPX_SB_WEED_SHOP_OWNED", 1);
+				Stats::SetPackedBool(28313, 28318);
+				Stats::SetPackedInt(24928, 10);
+				Stats::SetInt("MPX_PROG_HUB_TYCOON25_EARNINGS", 2000000);
+				Stats::SetInt("MPX_PROG_HUB_CWASH_SAFEEARNINGS", 500000);
+				Stats::SetPackedBool(51278, 51280);
+				Stats::SetPackedBool(51285, 51297);
+				Stats::SetInt("MPX_PROG_HUB_MFH_EARNINGS", 5000000);
+				Stats::SetPackedBool(28272, 28287);
+				Stats::SetInt("MPX_PROG_HUB_CBR_EARNINGS", 5000000);
+				Stats::SetInt("MPX_SUM23_AVOP_PROGRESS", 4095);
+				Stats::SetInt("MPX_ULP_MISSION_PROGRESS", 16383);
+				Stats::SetInt("MPX_YACHT_MISSION_FLOW", 21845);
+				Stats::SetPackedBool(41507, 42022);
+				Stats::SetInt("MPX_HACKER_DEN_OWNED", 1);
+				Stats::SetPackedBool(9539, true);
+				Stats::SetPackedInt(24903, 25);
+				Stats::SetPackedInt(24904, 2);
+				Stats::SetInt("MPX_PROG_HUB_DEN24_SAFEEARNINGS", 100000);
+				Stats::SetInt("MPX_HACKER24_GEN_BS", 8160);
+				Stats::SetPackedBool(9549, true);
+				Stats::SetPackedBool(9542, 9546);
+				Stats::SetInt("MPX_BAIL_OFFICE_OWNED", 1);
+				Stats::SetPackedBool(9537, true);
+				Stats::SetPackedBool(7639, true);
+				Stats::SetPackedInt(7669, 5);
+				Stats::SetPackedInt(7672, 2);
+				Stats::SetInt("MPX_PROG_HUB_BOUNTY_EARNINGS", 5000000);
+				Stats::SetPackedInt(7670, 10);
+				Stats::SetPackedInt(7674, 3);
+				Stats::SetPackedInt(7671, 25);
+				Stats::SetInt("MPX_PROG_HUB_BOUNTIES_ALIVE_BS", -1);
+				Stats::SetInt("MPX_BAIL_PROPERTY_EARNINGS", 1000000);
+				Stats::SetInt("MPX_SALVAGE_YARD_OWNED", 1);
+				Stats::SetPackedBool(42037, 42038);
+				Stats::SetPackedBool(42041, 42042);
+				Stats::SetPackedBool(42044, 42051);
+				Stats::SetInt("MPX_PROG_HUB_SALV23_EARN_SALV", 2500000);
+				Stats::SetInt("MPX_PROG_HUB_SALV23_EARN_PERF", 5);
+				Stats::SetInt("MPX_PROG_HUB_SALV23_EARN_SELL", 10000000);
+				Stats::SetInt("MPX_XM22_MISSIONS_SA", -1);
+				Stats::SetInt("MPX_LFETIME_BIKER_BUY_COMPLET6", 100);
+				Stats::SetInt("MPX_XM22_FLOW", -1);
+				Stats::SetInt("MPX_LIFETIME_BKR_SELL_EARNINGS6", 10000000);
+				Stats::SetInt("MPX_LFETIME_BIKER_SELL_COMPLET6", 10);
+				Stats::SetPackedInt(41241, 5);
+				Stats::SetInt("MPX_PROG_HUB_LSDW_FJ_NO_DEATHS", 25);
+				Stats::SetInt("MPX_PROG_HUB_DAX_CLONE_KILLS", 100);
+				Stats::SetPackedBool(41660, 41670);
+				Stats::SetPackedBool(28257, true);
+				Stats::SetInt("MPX_FIXER_COUNT", 100);
+				Stats::SetInt("MPX_FIXER_GENERAL_BS", -1);
+				Stats::SetBool("MPX_AWD_PARTY_NIGHT", true);
+				Stats::SetBool("MPX_AWD_BILLIONAIRE_GAMES", true);
+				Stats::SetBool("MPX_AWD_HOOD_PASS", true);
+				Stats::SetInt("MPX_AWD_COLD_CALLER", 10);
+				Stats::SetInt("MPX_PROG_HUB_FXER_PAY_HIT_BONUS", 100);
+				Stats::SetBool("MPX_AWD_SHORTFRANK_1", true);
+				Stats::SetBool("MPX_AWD_SHORTFRANK_2", true);
+				Stats::SetBool("MPX_AWD_SHORTFRANK_3", true);
+				Stats::SetBool("MPX_AWD_SHORTLAMAR_1", true);
+				Stats::SetBool("MPX_AWD_SHORTLAMAR_2", true);
+				Stats::SetBool("MPX_AWD_SHORTLAMAR_3", true);
+				Stats::SetInt("MPX_PROG_HUB_FIXER_SEC_CON_SPEC", 100);
+				Stats::SetInt("MPX_FIXER_EARNINGS", 5000000);
+				Stats::SetPackedBool(22067, true);
+				Stats::SetInt("MPX_NIGHTCLUB_JOBS_DONE", 25);
+				Stats::SetInt("MPX_PROG_HUB_DANCE_DUR", 5);
+				Stats::SetPackedBool(15533, true);
+				Stats::SetPackedBool(22082, 22083);
+				Stats::SetPackedBool(36944, true);
+				Stats::SetPackedBool(41989, true);
+				Stats::SetInt("MPX_NIGHTCLUB_VIP_APPEAR", 25);
+				Stats::SetInt("MPX_PROG_HUB_NCLUB_POP_MAX_TME", 600);
+				Stats::SetInt("MPX_HUB_EARNINGS", 50000000);
+				Stats::SetPackedBool(15966, true);
+				Stats::SetInt("MPX_LFETIME_HANGAR_BUY_COMPLET", 100);
+				Stats::SetPackedBool(41676, true);
+				Stats::SetInt("MPX_LFETIME_HANGAR_SEL_COMPLET", 1);
+				Stats::SetPackedBool(41987, true);
+				Stats::SetInt("MPX_PROG_HUB_SMUGGLER_CRATES", 1000);
+				Stats::SetPackedBool(36924, 36938);
+				Stats::SetInt("MPX_LFETIME_HANGAR_EARNINGS", 50000000);
+				Stats::SetInt("MPX_FACTORYSETUP5", 1);
+				Stats::SetInt("MPX_LFETIME_BIKER_BUY_COMPLET5", 2);
+				Stats::SetPackedInt(9359, 25);
+				Stats::SetPackedBool(36870, 36917);
+				Stats::SetInt("MPX_WVM_FLOW_BITSET_MISSIONS0", 1);
+				Stats::SetInt("MPX_LIFETIME_BKR_SEL_COMPLETBC5", 1);
+				Stats::SetInt("MPX_LFETIME_BIKER_SELL_COMPLET5", 1);
+				Stats::SetInt("MPX_SR_WEAPON_BIT_SET", -1);
+				Stats::SetInt("MPX_LFETIME_BIKER_BUY_COMPLET5", 25);
+				Stats::SetPackedBool(42002, 42013);
+				Stats::SetPackedBool(36831, 36865);
+				Stats::SetInt("MPX_LIFETIME_BKR_SELL_EARNINGS5", 25000000);
+				Stats::SetInt("MPX_OWNED_IE_WAREHOUSE", 1);
+				Stats::SetInt("MPX_LFETIME_IE_EXPORT_COMPLETED", 25);
+				Stats::SetPackedBool(42029, 42036);
+				Stats::SetPackedBool(41874, 41883);
+				Stats::SetInt("MPX_PROG_HUB_VEH_CARGO_SELL_PER", 50);
+				Stats::SetInt("MPX_PROG_HUB_VEH_CARGO_SPECIAL", 5);
+				Stats::SetPackedBool(41988, true);
+				Stats::SetInt("MPX_LFETIME_IE_MISSION_EARNINGS", 25000000);
+				Stats::SetInt("MPX_LIFETIME_BKR_SELL_COMPLETBC", 1);
+				Stats::SetInt("MPX_LIFETIME_BKR_SEL_COMPLETBC1", 1);
+				Stats::SetInt("MPX_LIFETIME_BKR_SEL_COMPLETBC2", 1);
+				Stats::SetInt("MPX_LIFETIME_BKR_SEL_COMPLETBC3", 1);
+				Stats::SetInt("MPX_LIFETIME_BKR_SEL_COMPLETBC4", 1);
+				Stats::SetInt("MPX_BAR_RESUPPLY_CR", 10);
+				Stats::SetInt("MPX_LIFETIME_BKR_SELL_EARNINGS0", 25000000);
+				Stats::SetInt("MPX_PROG_HUB_BIK_CUST_DEL_CASH", 2500000);
+				Stats::SetInt("MPX_PROG_HUB_CLBH_BAR_EARNINGS", 500000);
+				Stats::SetInt("MPX_PROG_HUB_BIK_CONTRACT_COUNT", 50);
+				Stats::SetPackedBool(7553, 7592);
+				Stats::SetInt("MPX_WARHOUSESLOT0", 1);
+				Stats::SetInt("MPX_LIFETIME_BUY_COMPLETE", 1);
+				Stats::SetInt("MPX_PROG_HUB_FAIFAF_CRATES_COL", 250);
+				Stats::SetInt("MPX_LIFETIME_CONTRA_EARNINGS", 50000000);
+				Stats::SetInt("MPX_CAR_CLUB_MEMBERSHIP", 1);
+				Stats::SetPackedBool(31737, true);
+				Stats::SetPackedBool(31753, true);
+				Stats::SetBool("MPX_AWD_PRO_CAR_EXPORT", true);
+				Stats::SetInt("MPX_TUNER_COMP_BS", 255);
+				Stats::SetInt("MPX_AWD_AUTO_SHOP", 10);
+				Stats::SetInt("MPX_AWD_CAR_CLUB_MEM", 100);
+				Stats::SetPackedBool(32397, 32399);
+				Stats::SetInt("MPX_TUNER_COUNT", 25);
+				Stats::SetInt("MPX_PROG_HUB_TUNER_CUS_DEL_CASH", 5000000);
+				Stats::SetPackedBool(27089, 27090);
+				Stats::SetInt("MPX_VCM_FLOW_PROGRESS", -1);
+				Stats::SetInt("MPX_AWD_ODD_JOBS", 100);
+				Stats::SetPackedBool(30309, true);
+				Stats::SetPackedBool(30522, true);
+				Stats::SetInt("MPX_H4_MISSIONS", -1);
+				Stats::SetInt("MPX_H4_PROGRESS", -1);
+				Stats::SetInt("MPX_H4_H4_DJ_MISSIONS", 127);
+				Stats::SetInt("MPX_AWD_TREASURE_HUNTER", 10);
+				Stats::SetInt("MPX_PROG_HUB_CAYO_PRP_NO_DEATHS", 25);
+				Stats::SetInt("MPX_CR_SUBMARINE", 1);
+				Stats::SetInt("MPX_CR_STRATEGIC_BOMBER", 1);
+				Stats::SetInt("MPX_CR_SMUGGLER_PLANE", 1);
+				Stats::SetInt("MPX_CR_STEALTH_HELI", 1);
+				Stats::SetInt("MPX_CR_PATROL_BOAT", 1);
+				Stats::SetInt("MPX_CR_SMUGGLER_BOAT", 1);
+				Stats::SetInt("MPX_PROG_HUB_CAYO_H_EARNINGS", 50000000);
+				Stats::SetInt("MPX_CAS_HEIST_FLOW", -1);
+				Stats::SetPackedBool(28270, true);
+				Stats::SetPackedBool(36842, true);
+				Stats::SetInt("MPX_AWD_PREPARATION", 25);
+				Stats::SetBool("MPX_AWD_CREWEDUP", true);
+				Stats::SetPackedBool(42025, true);
+				Stats::SetInt("MPX_PROG_HUB_CASINO_H_EARNINGS", 50000000);
+				Stats::SetInt("MPX_AWD_DAICASHCRAB", 100000);
+				Stats::SetPackedBool(18139, true);
+				Stats::SetPackedBool(36861, true);
+				Stats::SetInt("MPX_GANGOPS_FLOW_BITSET_MISS0", -1);
+				Stats::SetPackedBool(41712, 41714);
+				Stats::SetInt("MPX_PROG_HUB_DOOM_PRP_NO_DEATHS", 14);
+				Stats::SetInt("MPX_PROG_HUB_DOOMSDAY_ACTS", 15);
+				Stats::SetPackedBool(36867, 36868);
+				Stats::SetPackedBool(41715, 41719);
+				Stats::SetPackedInt(42100, 5);
+				Stats::SetInt("MPX_PROG_HUB_HEIST_EARNINGS", 50000000);
+				Stats::SetPackedBool(25009, true);
+				Stats::SetPackedInt(22063, 20);
+				Stats::SetInt("MPX_ARENAWARS_AP_TIER", 50);
+				Stats::SetPackedInt(42000, 20);
+				Stats::SetPackedBool(51339, true);
+				Stats::SetPackedBool(36840, true);
+				Stats::SetInt("MPX_PROG_HUB_ADV_WINS", 50);
+				Stats::SetInt("MPX_PROG_HUB_SURVIVALS_PLAYED", 1);
+				Stats::SetInt("MPX_PROG_HUB_SURV_WAVES", 50);
+				Stats::SetInt("MPX_AWD_FMHORDWAVESSURVIVE", 10);
+				Stats::SetPackedBool(41331, 41506);
+				Stats::SetInt("MPX_PROG_HUB_SURV_WAVES", 250);
+				Stats::SetPackedBool(42023, true);
+				Stats::SetInt("MPX_RACES_WON", 50);
+				Stats::SetInt("MPX_PROG_HUB_T_TRIAL_PAR_TIME", -1);
+				Stats::SetInt("MPX_PROG_HUB_T_TRL_PAR_TIME_RC", -1);
+				Stats::SetInt("MPX_PROG_HUB_T_TRL_PAR_TIME_HSW", -1);
+				Stats::SetInt("MPX_PROG_HUB_T_TRL_PAR_TIME_BKE", -1);
+				Stats::SetPackedInt(41246, 20);
+				Stats::SetInt("MPX_PROG_HUB_FST_LPS_RSTAR_RAC", 50);
+				Stats::SetInt("MPX_DM_END", 1);
+				Stats::SetInt("MPX_PROG_HUB_DM_TDM_PLAYS", 1);
+				Stats::SetInt("MPX_AWD_FM_DM_WINS", 50);
+				Stats::SetInt("MPX_PROG_HUB_DM_COMMUNITY_PLAYS", 10);
+				Stats::SetInt("MPX_PROG_HUB_DTHM_KILL_5_WO_DIE", 25);
+				Stats::SetPackedBool(36922, true);
+				Stats::SetPackedInt(42092, 5);
+				Stats::SetInt("MPX_HUB_VEH_ENTH_OWNED_VEHS", 99);
+				Stats::SetInt("MPX_VEHICLES_CUSTOMISED", 50);
+				Stats::SetPackedBool(36920, 36922);
+				Stats::SetInt("MPX_PROG_HUB_WEAP_TYPE_ANSR", -1);
+				Stats::SetPackedInt(41242, 255);
+				Stats::SetPackedBool(36941, 36942);
+				Stats::SetInt("MPX_PROG_HUB_10_CHAL_ANSR", 10);
+				Stats::SetPackedBool(15456, 15460);
+				Stats::SetPackedInt(24929, 14);
+				Stats::SetPackedInt(24905, 9);
+				Stats::SetPackedInt(26809, 10);
+				Stats::SetPackedInt(51052, 10);
+				Stats::SetPackedInt(42084, 24);
+				Stats::SetPackedInt(42085, 10);
+				Stats::SetPackedInt(42089, 8);
+				Stats::SetPackedInt(30226, 10);
+				Stats::SetPackedInt(42093, 11);
+				Stats::SetPackedInt(42094, 15);
+				Stats::SetPackedInt(42086, 15);
+				Stats::SetPackedInt(42087, 10);
+				Stats::SetPackedInt(42090, 15);
+				Stats::SetPackedInt(42088, 15);
+				Stats::SetPackedInt(42091, 10);
+				STATS::STAT_SAVE(0, 0, 3, 0);
+			}
+			else
+			{
+				Notifications::Show("YimMenuV2", "You Must be Online", NotificationType::Error);
+			}
+		}
+	};
+	static UnlockCareerProgress _UnlockCareerProgress{
+	    "unlockallcareerprogress",
+	    "Unlock All Career Progress",
+	    "Completes all Career Progress categories"};
+}

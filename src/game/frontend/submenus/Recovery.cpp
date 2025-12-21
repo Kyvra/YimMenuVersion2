@@ -14,6 +14,9 @@ namespace YimMenu::Submenus
 		auto main = std::make_shared<Category>("Main");
 		auto businesses = std::make_shared<Category>("Businesses");
 		auto casino = std::make_shared<Category>("Casino");
+		auto unlocks = std::make_shared<Category>("Unlocks");
+		auto generalUnlocks = std::make_shared<Group>("General");
+		auto trophies = std::make_shared<Group>("Trophies");
 
 		auto generalGroup = std::make_shared<Group>("General");
 		auto businessGroup = std::make_shared<Group>("General");
@@ -21,6 +24,9 @@ namespace YimMenu::Submenus
 		//auto casinoWheel = std::make_shared<Group>("Lucky Wheel");
 		//auto casinoBlackJack = std::make_shared<Group>("Blackjack");
 		//auto casinoRoulette = std::make_shared<Group>("Roulette");
+
+
+
 
 		generalGroup->AddItem(std::make_shared<BoolCommandItem>("playallmissionssolo"_J));
 		generalGroup->AddItem(std::make_shared<BoolCommandItem>("unlockgtaplus"_J));
@@ -38,15 +44,28 @@ namespace YimMenu::Submenus
 		businessGroup->AddItem(std::make_shared<CommandItem>("claimsafeearnings"_J));
 
 		casinoSlots->AddItem(std::make_shared<BoolCommandItem>("casinomanipulaterigslotmachines"_J));
-		
+
+	
+		generalUnlocks->AddItem(std::make_shared<CommandItem>("unlockallcareerprogress"_J));
+		generalUnlocks->AddItem(std::make_shared<CommandItem>("unlockalltattoos"_J));
+
+
+		trophies->AddItem(std::make_shared<CommandItem>("unlockallmansiontrophies"_J));
+
 
 		main->AddItem(generalGroup);
 		businesses->AddItem(businessGroup);
 		casino->AddItem(casinoSlots);
+		unlocks->AddItem(generalUnlocks);
+		unlocks->AddItem(trophies);
+
+
+
 
 		AddCategory(std::move(main));
 		AddCategory(std::move(businesses));
 		AddCategory(std::move(casino));
+		AddCategory(std::move(unlocks));
 		AddCategory(BuildStatEditorMenu());
 		AddCategory(BuildTransactionsMenu());
 		AddCategory(BuildHeistModifierMenu());
