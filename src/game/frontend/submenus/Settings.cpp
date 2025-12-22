@@ -6,7 +6,7 @@
 #include "game/frontend/items/Items.hpp"
 #include "game/frontend/items/DrawHotkey.hpp"
 #include "game/frontend/submenus/Settings/LuaScripts.hpp"
-#include "game/features/theme/theme.h"
+#include "game/features/theme/theme.hpp"
 #include <imgui.h>
 
 
