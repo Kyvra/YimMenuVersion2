@@ -52,7 +52,6 @@ namespace YimMenu::Submenus
 
 		trophies->AddItem(std::make_shared<CommandItem>("unlockallmansiontrophies"_J));
 
-
 		main->AddItem(generalGroup);
 		businesses->AddItem(businessGroup);
 		casino->AddItem(casinoSlots);
