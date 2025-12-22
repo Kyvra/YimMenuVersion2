@@ -16,6 +16,7 @@ namespace YimMenu::Features
 				Stats::SetPackedBool(15428, 15439);
 				Stats::SetPackedBool(15447, 15474);
 				Stats::SetPackedBool(15491, 15499);
+				STATS::STAT_SAVE(0, 0, 3, 0);
 			}
 			else
 			{
@@ -27,4 +28,5 @@ namespace YimMenu::Features
 	    "BunkerUnlocks",
 	    "Bunker Unlocks",
 	    "Bunkerunlocks"};
+
 }
