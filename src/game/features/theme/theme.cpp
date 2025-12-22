@@ -1,4 +1,5 @@
-#include "theme.h"
+#include "theme.hpp"
+
 namespace YimMenu
 {
 	bool DrawColorWheel(const char* id, ImVec4& color, float radius = 60.f)
@@ -238,7 +239,7 @@ namespace YimMenu
 			ImGui::SetNextWindowSize(ImVec2(300.f, 380.f), ImGuiCond_Appearing);
 		}
 		if (ImGui::BeginPopup("Color Wheel",
-		  ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoCollapse))
+		        ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoCollapse))
 		{
 			if (editing >= 0 && editing < ImGuiCol_COUNT)
 			{
