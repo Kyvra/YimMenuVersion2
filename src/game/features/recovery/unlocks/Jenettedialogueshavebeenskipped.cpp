@@ -13,6 +13,7 @@ namespace YimMenu::Features
 			if (*Pointers.IsSessionStarted)
 			{
 				Stats::SetPackedBool(51192, 51195);
+				STATS::STAT_SAVE(0, 0, 3, 0);
 			}
 			else
 			{
@@ -24,4 +25,5 @@ namespace YimMenu::Features
 	    "SkipJenetteTheMutette",
 	    "Skip Jenette The Mutette",
 	    "Skip JenetteTheMutette"};
+
 }
