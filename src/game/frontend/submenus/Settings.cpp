@@ -1,5 +1,4 @@
 #include "Settings.hpp"
-
 #include "core/commands/Commands.hpp"
 #include "core/commands/HotkeySystem.hpp"
 #include "core/commands/LoopedCommand.hpp"
@@ -7,6 +6,9 @@
 #include "game/frontend/items/Items.hpp"
 #include "game/frontend/items/DrawHotkey.hpp"
 #include "game/frontend/submenus/Settings/LuaScripts.hpp"
+#include "game/features/theme/theme.h"
+#include <imgui.h>
+
 
 namespace YimMenu::Submenus
 {
@@ -40,7 +42,6 @@ namespace YimMenu::Submenus
 			DrawHotkey(link, name);
 		}
 	};
-
 	Settings::Settings() :
 	#define ICON_FA_GEARS "\xef\x80\x93"
 	    Submenu::Submenu("Settings", ICON_FA_GEARS)
@@ -48,8 +49,9 @@ namespace YimMenu::Submenus
 		auto hotkeys = std::make_shared<Category>("Hotkeys");
 		auto gui = std::make_shared<Category>("GUI");
 		auto game = std::make_shared<Category>("Game");
-
+		auto theme = std::make_shared<Category>("Theme");
 		auto uiStyle = std::make_shared<Group>("UI");
+
 		auto playerEsp = std::make_shared<Group>("Player ESP", 10);
 		auto pedEsp = std::make_shared<Group>("Ped ESP", 10);
 		auto objectEsp = std::make_shared<Group>("Object ESP");
@@ -100,17 +102,23 @@ namespace YimMenu::Submenus
 
 		chat->AddItem(std::make_shared<BoolCommandItem>("clearchat"_J));
 
+
+		//Editor 
+		theme->AddItem(std::make_shared<ImGuiItem>(theme_editor));
+
+
 		game->AddItem(playerEsp);
 		game->AddItem(pedEsp);
 		game->AddItem(objectEsp);
-
 		gui->AddItem(uiStyle);
 		gui->AddItem(overlay);
 		gui->AddItem(chat);
-
+		
 		AddCategory(std::move(hotkeys));
 		AddCategory(std::move(gui));
 		AddCategory(std::move(game));
+		AddCategory(std::move(theme));
+
 		AddCategory(BuildLuaScriptsMenu());
 	}
 }

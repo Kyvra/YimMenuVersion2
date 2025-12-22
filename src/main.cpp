@@ -28,13 +28,23 @@
 
 namespace YimMenu
 {
+	static std::filesystem::path InitProjectFolders()
+	{
+		const char* appdata = std::getenv("APPDATA");
+		if (!appdata)
+			return {};
+		std::filesystem::path root = std::filesystem::path(appdata) / "YimMenuV2";
+		std::filesystem::create_directories(root);
+		std::filesystem::create_directories(root / "Themes");
+		std::filesystem::create_directories(root / "Scripts");
+		return root;
+	}
 	DWORD Main(void*)
 	{
-		const auto documents = std::filesystem::path(std::getenv("appdata")) / "YimMenuV2";
+		const auto documents = InitProjectFolders();
 		FileMgr::Init(documents);
 
 		LogHelper::Init("YimMenuV2", FileMgr::GetProjectFile("./cout.log"));
-
 		LOGF(INFO, "Welcome to YimMenuV2! Build date: {} at {}", __DATE__, __TIME__);
 
 		g_HotkeySystem.RegisterCommands();
