@@ -2,6 +2,7 @@
 #include "game/gta/Natives.hpp"
 #include "core/frontend/Notifications.hpp"
 #include "game/gta/Stats.hpp"
+#include "core/backend/ScriptMgr.hpp"
 
 namespace YimMenu::Features
 {
@@ -245,4 +246,5 @@ namespace YimMenu::Features
 	    "Unlock All Career Progress",
 	    "Completes all Career Progress categories"};
 }
+
 
