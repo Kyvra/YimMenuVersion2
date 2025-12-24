@@ -24,6 +24,6 @@ namespace YimMenu::Features
 	static SkipDrDreeContract _SkipDrDreeContract{
 	    "SkipDrDreeContract",
 	    "Skip Dr Dree Contract",
-	    "Skip DrDreeContract"};
+	    "Skip Dr Dree Contract"};
 
 }
