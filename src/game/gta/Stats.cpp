@@ -84,7 +84,13 @@ namespace YimMenu::Stats
 		ConvertMPX(statName);
 		return STATS::STAT_GET_STRING(Joaat(statName), -1); // The native is null-safe
 	}
-
+	void SetPackedBoolRange(int start, int end, bool value)
+	{
+		for (int i = start; i <= end; ++i)
+		{
+			SetPackedBool(i, value);
+		}
+	}
 	void SetPackedBool(int index, bool value)
 	{
 		STATS::SET_PACKED_STAT_BOOL_CODE(index, value, -1);
