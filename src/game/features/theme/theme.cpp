@@ -3,45 +3,45 @@
 namespace YimMenu
 {
 	bool DrawColorWheel(const char* id, ImVec4& color, float radius = 60.f)
+{
+	ImGuiWindow* window = ImGui::GetCurrentWindow();
+	if (!window || window->SkipItems)
+		return false;
+	ImDrawList* draw = window->DrawList;
+	ImVec2 pos = ImGui::GetCursorScreenPos();
+	ImVec2 size(radius * 2.f, radius * 2.f);
+	ImVec2 center = pos + ImVec2(radius, radius);
+	ImGui::InvisibleButton(id, size);
+	bool hovered = ImGui::IsItemHovered();
+	bool active = ImGui::IsItemActive();
+	const int segments = 96;
+	for (int i = 0; i < segments; i++)
 	{
-		ImGuiWindow* window = ImGui::GetCurrentWindow();
-		if (!window || window->SkipItems)
-			return false;
-		ImDrawList* draw = window->DrawList;
-		ImVec2 pos = ImGui::GetCursorScreenPos();
-		ImVec2 size(radius * 2.f, radius * 2.f);
-		ImVec2 center = pos + ImVec2(radius, radius);
-		ImGui::InvisibleButton(id, size);
-		bool hovered = ImGui::IsItemHovered();
-		bool active = ImGui::IsItemActive();
-		const int segments = 96;
-		for (int i = 0; i < segments; i++)
-		{
-			float a0 = (i / (float)segments) * IM_PI * 2.f;
-			float a1 = ((i + 1) / (float)segments) * IM_PI * 2.f;
-			ImU32 col = ImColor::HSV(i / (float)segments, 1.f, 1.f);
-			draw->AddTriangleFilled(
-			    center,
-			    center + ImVec2(cosf(a0), sinf(a0)) * radius,
-			    center + ImVec2(cosf(a1), sinf(a1)) * radius,
-			    col);
-		}
-		draw->AddCircle(center, radius, IM_COL32(255, 255, 255, hovered ? 180 : 110), 0, 1.5f);
-		if (active)
-		{
-			ImVec2 m = ImGui::GetIO().MousePos - center;
-			float dist = sqrtf(m.x * m.x + m.y * m.y);
-			if (dist <= radius)
-			{
-				float h = atan2f(m.y, m.x) / (IM_PI * 2.f);
-				if (h < 0.f)
-					h += 1.f;
-
-				ImGui::ColorConvertHSVtoRGB(h, 1.f, 1.f, color.x, color.y, color.z);
-			}
-		}
-		return active;
+		float a0 = (i / (float)segments) * IM_PI * 2.f;
+		float a1 = ((i + 1) / (float)segments) * IM_PI * 2.f;
+		ImU32 col = ImColor::HSV(i / (float)segments, 1.f, 1.f);
+		draw->AddTriangleFilled(
+		    center,
+		    center + ImVec2(cosf(a0), sinf(a0)) * radius,
+		    center + ImVec2(cosf(a1), sinf(a1)) * radius,
+		    col);
 	}
+	draw->AddCircle(center, radius, IM_COL32(255, 255, 255, hovered ? 180 : 110), 0, 1.5f);
+	if (active)
+	{
+		ImVec2 m = ImGui::GetIO().MousePos - center;
+		float dist = sqrtf(m.x * m.x + m.y * m.y);
+		if (dist <= radius)
+		{
+			float h = atan2f(m.y, m.x) / (IM_PI * 2.f);
+			if (h < 0.f)
+				h += 1.f;
+
+			ImGui::ColorConvertHSVtoRGB(h, 1.f, 1.f, color.x, color.y, color.z);
+		}
+	}
+	return active;
+}
 	static std::filesystem::path GetThemesPath()
 	{
 		const char* appdata = std::getenv("APPDATA");
@@ -270,3 +270,4 @@ namespace YimMenu
 		ImGui::EndChild();
 	}
 }
+
