@@ -47,6 +47,8 @@ namespace YimMenu::Submenus
 		misc->AddItem(std::make_shared<BoolCommandItem>("allowhatsinvehicles"_J));
 		misc->AddItem(std::make_shared<BoolCommandItem>("lsccustomsbypass"_J));
 		misc->AddItem(std::make_shared<BoolCommandItem>("dlcvehicles"_J));
+		misc->AddItem(std::make_shared<BoolCommandItem>("vehicledrift"_J));
+		misc->AddItem(std::make_shared<ListCommandItem>("driftvariant"_J,"Drift Variant"));
 
 		main->AddItem(globals);
 		main->AddItem(tools);
