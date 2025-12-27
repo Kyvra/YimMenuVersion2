@@ -6,35 +6,11 @@
 #include <random>
 #include "game/backend/Outfit.hpp"
 #include <nlohmann/json.hpp>
-#include <Windows.h>
-#include <cstdlib>
-#include <string>
 
 // TODO: clean up more AI generated junk from this file
 
 namespace YimMenu
 {
-	struct OutfitComponent
-	{
-		int component;
-		int drawable;
-		int texture;
-		int palette;
-	};
-
-	struct OutfitProp
-	{
-		int prop;
-		int drawable;
-		int texture;
-	};
-
-	struct OutfitData
-	{
-		std::string name;
-		std::vector<OutfitComponent> components;
-		std::vector<OutfitProp> props;
-	};
 	static std::string GetOutfitPath()
 	{
 		const char* appdata = std::getenv("APPDATA");
