@@ -17,6 +17,7 @@ namespace YimMenu
 		static nlohmann::json GetJson(Vehicle vehicle);
 		static Folder CheckFolder(std::string folderName = "");
 		static Vehicle SpawnFromJson(nlohmann::json);
+        static Folder CheckIniFolder(std::string folderName);
 
 	private:
 		static constexpr auto plate_text_key = "plate_text";
