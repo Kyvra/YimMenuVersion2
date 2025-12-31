@@ -19,6 +19,8 @@ namespace YimMenu::Submenus
 		auto trophies = std::make_shared<Group>("Trophies");
 		auto skip = std::make_shared<Group>("Skipper");
 
+
+		auto gunvanGroup = std::make_shared<Group>("Gun Van");
 		auto generalGroup = std::make_shared<Group>("General");
 		auto businessGroup = std::make_shared<Group>("General");
 		auto casinoSlots = std::make_shared<Group>("Slot Machines");
@@ -42,6 +44,11 @@ namespace YimMenu::Submenus
 		generalGroup->AddItem(std::make_shared<BoolCommandItem>("peddropcash"_J));
 		generalGroup->AddItem(std::make_shared<BoolCommandItem>("vehicledropcash"_J));
 
+		
+		gunvanGroup->AddItem(std::make_shared<ListCommandItem>("gunvanslot"_J));
+		gunvanGroup->AddItem(std::make_shared<ListCommandItem>("gunvanweapon"_J));
+		gunvanGroup->AddItem(std::make_shared<CommandItem>("setgunvanweapon"_J));
+
 		businessGroup->AddItem(std::make_shared<ListCommandItem>("businesssafe"_J));
 		businessGroup->AddItem(std::make_shared<CommandItem>("claimsafeearnings"_J));
 
@@ -59,20 +66,23 @@ namespace YimMenu::Submenus
 		skip->AddItem(std::make_shared<CommandItem>("SkipJenetteTheMutette"_J));
 		skip->AddItem(std::make_shared<CommandItem>("SkipCluckinBellRaid"_J));
 
+
 		trophies->AddItem(std::make_shared<CommandItem>("unlockallmansiontrophies"_J));
 
-		auto gunvanGroup = std::make_shared<Group>("Gun Van", 2);
-		gunvanGroup->AddItem(std::make_shared<ListCommandItem>("gunvanslot"_J));
-		gunvanGroup->AddItem(std::make_shared<ListCommandItem>("gunvanweapon"_J));
-		gunvanGroup->AddItem(std::make_shared<CommandItem>("setgunvanweapon"_J));
+		
 
-		main->AddItem(gunvanGroup);
+
+
+
+		
 		main->AddItem(generalGroup);
+		main->AddItem(gunvanGroup);
 		businesses->AddItem(businessGroup);
 		casino->AddItem(casinoSlots);
 		unlocks->AddItem(generalUnlocks);
 		unlocks->AddItem(trophies);
 		unlocks->AddItem(skip);
+
 		
 		AddCategory(std::move(main));
 		AddCategory(std::move(businesses));
