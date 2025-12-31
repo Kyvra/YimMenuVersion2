@@ -19,9 +19,8 @@ namespace YimMenu::Submenus
 		auto trophies = std::make_shared<Group>("Trophies");
 		auto skip = std::make_shared<Group>("Skipper");
 
-
-		auto gunvanGroup = std::make_shared<Group>("Gun Van");
 		auto generalGroup = std::make_shared<Group>("General");
+		auto gunvanGroup = std::make_shared<Group>("Gun Van");
 		auto businessGroup = std::make_shared<Group>("General");
 		auto casinoSlots = std::make_shared<Group>("Slot Machines");
 		//auto casinoWheel = std::make_shared<Group>("Lucky Wheel");
