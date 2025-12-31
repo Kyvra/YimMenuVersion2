@@ -79,6 +79,7 @@ namespace YimMenu
 		ScriptPointers::Init();
 
 		GUI::Init();
+		Updater::CheckForUpdates();
 
 		ScriptMgr::AddScript(std::make_unique<Script>(&NativeHooks::RunScript)); // runs once
 		ScriptMgr::AddScript(std::make_unique<Script>(&Tunables::RunScript));    // runs once
