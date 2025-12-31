@@ -2,6 +2,9 @@
 #include "core/commands/ListCommand.hpp"
 #include "core/backend/FiberPool.hpp"
 #include "game/backend/Tunables.hpp"
+#include <array>
+#include <vector>
+#include <utility>
 namespace YimMenu::Features
 {
 	inline constexpr auto allowedGunVanWeapons = std::to_array({"WEAPON_KNIFE",
@@ -92,15 +95,18 @@ namespace YimMenu::Features
 	    "WEAPON_FIREWORK",
 	    "WEAPON_BATTLERIFLE",
 	    "WEAPON_SNOWLAUNCHER"});
-	inline constexpr auto allowedGunVanSlots = std::to_array({"1", "2", "3", "4", "5", "6", "7", "8", "9", "10"});
+	   inline constexpr auto allowedGunVanSlots = std::to_array({"1", "2", "3", "4", "5", "6", "7", "8", "9", "10"});
 	static std::vector<std::pair<int, const char*>> g_GunVanSlotList{};
 	static std::vector<std::pair<int, const char*>> g_GunVanWeaponList{};
 	inline void SetGunvanWeapon(const char* weapon, int slot)
 	{
 		FiberPool::Push([weapon, slot] {
-			auto slottun = "XM22_GUN_VAN_SLOT_WEAPON_TYPE_" + std::to_string(slot);
-			Tunable tun{Joaat(slottun.c_str())};
-			tun.Set(Joaat(weapon));
+			std::string tunableName =
+			    "XM22_GUN_VAN_SLOT_WEAPON_TYPE_" + std::to_string(slot);
+			Tunable tunable{Joaat(tunableName.c_str())};
+			if (!tunable.IsReady())
+				return;
+			tunable.Set(Joaat(weapon));
 		});
 	}
 	static void BuildGunVanLists()
