@@ -49,10 +49,14 @@ namespace YimMenu::Submenus
 		gunvanGroup->AddItem(std::make_shared<ListCommandItem>("gunvanslot"_J));
 		gunvanGroup->AddItem(std::make_shared<ListCommandItem>("gunvanweapon"_J));
 		gunvanGroup->AddItem(std::make_shared<CommandItem>("setgunvanweapon"_J));
+		gunvanGroup->AddItem(std::make_shared<CommandItem>("removegunvanweapon"_J));
 		gunvanGroup->AddItem(std::make_shared<ListCommandItem>("gunvanlocation"_J));
 		gunvanGroup->AddItem(std::make_shared<CommandItem>("setgunvanlocation"_J));
 		gunvanGroup->AddItem(std::make_shared<CommandItem>("teleportgunvan"_J));
+		gunvanGroup->AddItem(std::make_shared<BoolCommandItem>("gunvanskins"_J));
+		gunvanGroup->AddItem(std::make_shared<BoolCommandItem>("gunvanblip"_J));
 
+		
 		businessGroup->AddItem(std::make_shared<ListCommandItem>("businesssafe"_J));
 		businessGroup->AddItem(std::make_shared<CommandItem>("claimsafeearnings"_J));
 
