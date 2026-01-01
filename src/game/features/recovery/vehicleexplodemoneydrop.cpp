@@ -11,7 +11,6 @@ namespace YimMenu::Features
 
 		void OnTick() override
 		{
-			const Ped selfPed = Self::GetPed();
 			const Vehicle selfVehicle = Self::GetVehicle();
 			for (auto veh : Pools::GetVehicles())
 			{
