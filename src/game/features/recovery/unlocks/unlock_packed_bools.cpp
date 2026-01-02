@@ -282,4 +282,3 @@ namespace YimMenu::Features
 	    "Unlock packed bools",
 	    "Unlock packed bools"};
 }
-
