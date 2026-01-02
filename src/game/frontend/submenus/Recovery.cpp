@@ -20,6 +20,7 @@ namespace YimMenu::Submenus
 		auto skip = std::make_shared<Group>("Skipper");
 		auto Unreleased = std::make_shared<Group>("Unreleased");
 		auto requestServices = std::make_shared<Group>("Request Services");
+		auto missions = std::make_shared<Group>("Missions");
 
 		auto generalGroup = std::make_shared<Group>("General");
 		auto gunvanGroup = std::make_shared<Group>("Gun Van");
@@ -45,7 +46,6 @@ namespace YimMenu::Submenus
 		generalGroup->AddItem(std::make_shared<BoolCommandItem>("peddropcash"_J));
 		generalGroup->AddItem(std::make_shared<BoolCommandItem>("vehicledropcash"_J));
 
-		
 		gunvanGroup->AddItem(std::make_shared<ListCommandItem>("gunvanslot"_J));
 		gunvanGroup->AddItem(std::make_shared<ListCommandItem>("gunvanweapon"_J));
 		gunvanGroup->AddItem(std::make_shared<CommandItem>("setgunvanweapon"_J));
@@ -56,11 +56,10 @@ namespace YimMenu::Submenus
 		gunvanGroup->AddItem(std::make_shared<BoolCommandItem>("gunvanskins"_J));
 		gunvanGroup->AddItem(std::make_shared<BoolCommandItem>("gunvanblip"_J));
 
-		
 		businessGroup->AddItem(std::make_shared<ListCommandItem>("businesssafe"_J));
 		businessGroup->AddItem(std::make_shared<CommandItem>("claimsafeearnings"_J));
 		businessGroup->AddItem(std::make_shared<BoolCommandItem>("mansion_business_boost"_J));
-		
+    
 		casinoSlots->AddItem(std::make_shared<BoolCommandItem>("casinomanipulaterigslotmachines"_J));
 		
 		generalUnlocks->AddItem(std::make_shared<CommandItem>("unlockallcareerprogress"_J));
@@ -77,7 +76,6 @@ namespace YimMenu::Submenus
 		skip->AddItem(std::make_shared<CommandItem>("SkipJenetteTheMutette"_J));
 		skip->AddItem(std::make_shared<CommandItem>("SkipCluckinBellRaid"_J));
 
-
 		trophies->AddItem(std::make_shared<CommandItem>("unlockallmansiontrophies"_J));
 
 		requestServices->AddItem(std::make_shared<CommandItem>("requestmoc"_J));
@@ -93,22 +91,19 @@ namespace YimMenu::Submenus
 		Unreleased->AddItem(std::make_shared<CommandItem>("Unreleased_content"_J));
 		Unreleased->AddItem(std::make_shared<ListCommandItem>("luckyclover_location"_J));
 		Unreleased->AddItem(std::make_shared<CommandItem>("teleport_luckyclover"_J));
-		
+ 
+		missions->AddItem(std::make_shared<CommandItem>("alien_egg_mission"_J));
 
-
-
-
-		
 		main->AddItem(generalGroup);
 		main->AddItem(gunvanGroup);
 		main->AddItem(requestServices);
+		main->AddItem(missions);
 		businesses->AddItem(businessGroup);
 		casino->AddItem(casinoSlots);
 		unlocks->AddItem(generalUnlocks);
 		unlocks->AddItem(trophies);
 		unlocks->AddItem(skip);
 		unlocks->AddItem(Unreleased);
-
 		
 		AddCategory(std::move(main));
 		AddCategory(std::move(businesses));
