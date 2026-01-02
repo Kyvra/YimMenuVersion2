@@ -89,6 +89,8 @@ namespace YimMenu::Submenus
 		requestServices->AddItem(std::make_shared<CommandItem>("requestairstrike"_J));
 
 		Unreleased->AddItem(std::make_shared<CommandItem>("Unreleased_content"_J));
+		Unreleased->AddItem(std::make_shared<ListCommandItem>("luckyclover_location"_J));
+		Unreleased->AddItem(std::make_shared<CommandItem>("teleport_luckyclover"_J));
 		
 
 
