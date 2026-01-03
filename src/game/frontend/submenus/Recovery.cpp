@@ -22,6 +22,7 @@ namespace YimMenu::Submenus
 		auto requestServices = std::make_shared<Group>("Request Services");
 		auto missions = std::make_shared<Group>("Missions");
 		auto ceoGroup = std::make_shared<Group>("SecuroServ");
+		auto achievements = std::make_shared<Group>("Unlock Achievements");
 
 		auto generalGroup = std::make_shared<Group>("General");
 		auto gunvanGroup = std::make_shared<Group>("Gun Van");
@@ -98,12 +99,14 @@ namespace YimMenu::Submenus
 		ceoGroup->AddItem(std::make_shared<CommandItem>("Become_CEO"_J));
 		ceoGroup->AddItem(std::make_shared<CommandItem>("Become_MC"_J));
 
+		achievements->AddItem(std::make_shared<CommandItem>("unlock_achievements"_J));
+
 		main->AddItem(generalGroup);
 		main->AddItem(gunvanGroup);
 		main->AddItem(requestServices);
 		main->AddItem(missions);
 		main->AddItem(ceoGroup);
-		
+		main->AddItem(achievements);
 		businesses->AddItem(businessGroup);
 		casino->AddItem(casinoSlots);
 		unlocks->AddItem(generalUnlocks);
