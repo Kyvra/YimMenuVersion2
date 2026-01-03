@@ -155,6 +155,29 @@ namespace YimMenu::Submenus
 		int m_StatValue = 1;
 		int m_Price;
 	};
+	struct TriggerTransaction
+	{
+		const char* name{};
+		int amount{};
+		std::uint32_t hash{};
+	};
+	static const std::vector<TriggerTransaction> ExtraTriggers = {
+	    {"SERVICE_EARN_JOB_BONUS", 15'000'000, "SERVICE_EARN_JOB_BONUS"_J},
+	    {"SERVICE_EARN_BEND_JOB", 3'000'000, "SERVICE_EARN_BEND_JOB"_J},
+	    {"SERVICE_EARN_GANGOPS_AWARD_MASTERMIND_3", 7'000'000, "SERVICE_EARN_GANGOPS_AWARD_MASTERMIND_3"_J},
+	    {"SERVICE_EARN_CASINO_HEIST_FINALE", 3'610'000, "SERVICE_EARN_CASINO_HEIST_FINALE"_J},
+	    {"SERVICE_EARN_ISLAND_HEIST_FINALE", 2'550'000, "SERVICE_EARN_ISLAND_HEIST_FINALE"_J},
+	    {"SERVICE_EARN_HACKER_ROBBERY_FINALE", 2'200'000, "SERVICE_EARN_HACKER_ROBBERY_FINALE"_J},
+	    {"SERVICE_EARN_OSCAR_GUZMAN_MISSION", 1'000'000, "SERVICE_EARN_OSCAR_GUZMAN_MISSION"_J},
+	    {"SERVICE_EARN_AGENCY_STORY_FINALE", 3'000'000, "SERVICE_EARN_AGENCY_STORY_FINALE"_J},
+	    {"SERVICE_EARN_GANGOPS_AWARD_MASTERMIND_2", 3'000'000, "SERVICE_EARN_GANGOPS_AWARD_MASTERMIND_2"_J},
+	    {"SERVICE_EARN_SALVAGE_YARD_SELL_VEH", 2'100'000, "SERVICE_EARN_SALVAGE_YARD_SELL_VEH"_J},
+	    {"SERVICE_EARN_SALVAGE_VEHICLE", 2'100'000, "SERVICE_EARN_SALVAGE_VEHICLE"_J},
+	    {"SERVICE_EARN_CHICKEN_FACTORY_RAID_FINALE", 1'000'000, "SERVICE_EARN_CHICKEN_FACTORY_RAID_FINALE"_J},
+	    {"SERVICE_EARN_AVENGER_OPERATIONS", 1'000'000, "SERVICE_EARN_AVENGER_OPERATIONS"_J},
+	    {"SERVICE_EARN_MUSIC_STUDIO_SHORT_TRIP", 1'000'000, "SERVICE_EARN_MUSIC_STUDIO_SHORT_TRIP"_J},
+	    {"SERVICE_EARN_WINTER_22_AWARD_JUGGALO_STORY", 500'000, "SERVICE_EARN_WINTER_22_AWARD_JUGGALO_STORY"_J}};
+
 
 	struct TransactionInfo
 	{
@@ -504,6 +527,8 @@ namespace YimMenu::Submenus
 	{
 		auto menu = std::make_shared<Category>("Transactions");
 		auto normal = std::make_shared<Group>("Triggerer");
+		auto extraTriggerer = std::make_shared<Group>("Extra Triggerer");
+
 
 		normal->AddItem(std::make_unique<ImGuiItem>([] {
 			if (!NativeInvoker::AreHandlersCached())
@@ -586,8 +611,30 @@ namespace YimMenu::Submenus
 				ImGui::SetTooltip("The transaction isn't valid. Ensure that all fields are filled out correctly");
 			ImGui::EndDisabled();
 		}));
+	
+		extraTriggerer->AddItem(std::make_unique<ImGuiItem>([] {
+			ImGui::TextColored(ImVec4(1, 0, 0, 1), "These are high-value service triggers. Use responsibly!");
+			for (auto& trig : ExtraTriggers)
+			{
+				if (ImGui::Button(std::format("{} → ${}", trig.name, trig.amount / 1000).c_str()))
+				{
+					TransactionInfo info{};
+					info.m_Type = TransactionInfo::Type::SERVICE;
+					info.m_Category = {"SERVICE", "CATEGORY_SERVICE"_J};
+					info.m_Action = {"EARN", "NET_SHOP_ACTION_EARN"_J};
+					std::strncpy(info.m_Service.m_Item.m_Name, trig.name, sizeof(info.m_Service.m_Item.m_Name));
+					info.m_Service.m_Item.m_Hash = Joaat(trig.name);
+					info.m_Service.m_Price = trig.amount;
+
+					FiberPool::Push([info] {
+						ProcessTransaction(info);
+					});
+				}
+			}
+			}));
 
 		menu->AddItem(std::move(normal));
+		menu->AddItem(extraTriggerer);
 		return menu;
 	}
 }
