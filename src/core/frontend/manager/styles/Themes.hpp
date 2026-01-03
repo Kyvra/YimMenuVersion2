@@ -6,4 +6,5 @@ namespace YimMenu
 	extern void RenderClassicTheme();
 	extern void RenderModernTheme();
 	extern void RenderModernVTheme();
+	extern void RenderModularTheme();
 }
