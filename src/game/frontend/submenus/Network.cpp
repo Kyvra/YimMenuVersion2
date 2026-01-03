@@ -3,13 +3,13 @@
 #include "core/frontend/Notifications.hpp"
 #include "game/frontend/items/Items.hpp"
 #include "game/frontend/submenus/Network/SavedPlayers.hpp"
-#include "game/gta/Network.hpp"
 #include "game/frontend/submenus/Network/RandomEvents.hpp"
+#include "game/gta/Network.hpp"
 
 namespace YimMenu::Submenus
 {
 	Network::Network() :
-		#define ICON_FA_ROUTE "\xef\x9b\xbf"
+    #define ICON_FA_ROUTE "\xef\x9b\xbf"
 	    Submenu::Submenu("Network", ICON_FA_ROUTE)
 	{
 		// TODO: this needs a rework
@@ -111,6 +111,7 @@ namespace YimMenu::Submenus
 		spoofMMRegion->AddItem(std::make_shared<BoolCommandItem>("spoofmmregion"_J, "Spoof Region"));
 		spoofMMRegion->AddItem(std::make_shared<ConditionalItem>("spoofmmregion"_J, std::make_shared<ListCommandItem>("mmregion"_J, "##mmregion")));
 		matchmakingGroup->AddItem(std::make_shared<ConditionalItem>("cheaterpool"_J, spoofMMRegion, true));
+		matchmakingGroup->AddItem(std::make_shared<BoolCommandItem>("spoofdatahash"_J));
 		spoofing->AddItem(matchmakingGroup);
 
 		auto matchmakingSrvGroup = std::make_shared<Group>("Matchmaking (Server)");
