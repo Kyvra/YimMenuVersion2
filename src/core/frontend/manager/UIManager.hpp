@@ -19,6 +19,7 @@ namespace YimMenu
 		Classic = 0,
 		Modern,
 		ModernV,
+		Modular,
 	};
 
 	class UIManager
