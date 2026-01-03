@@ -7,7 +7,6 @@
 #include "game/gta/Natives.hpp"
 #include "types/rage/gameSkeleton.hpp"
 #include "types/anticheat/CAnticheatContext.hpp"
-#include "types/game_files/CGameDataHash.hpp"
 
 using FnGetVersion = int (*)();
 using FnLocalSaves = bool (*)();
@@ -34,29 +33,20 @@ namespace YimMenu
 		return NativeInvoker::GetNativeHandler(NativeIndex::NET_GAMESERVER_BEGIN_SERVICE)(ctx);
 	}
 
-	  
-    static void NopGameSkeletonElement(rage::gameSkeletonUpdateElement * element) {
-      auto vtable = * reinterpret_cast < void ** * > (element);
-      if (vtable[1] == Pointers.Nullsub) return; // already nopped
+	static void NopGameSkeletonElement(rage::gameSkeletonUpdateElement* element)
+	{
+		// TODO: small memory leak
+		// Hey rockstar if you keep up with this I'll make you integrity check everything until you can't anymore, please grow a brain and realize that this is futile
+		// and kills performance if you're the host
+		auto vtable = *reinterpret_cast<void***>(element);
+		if (vtable[1] == Pointers.Nullsub)
+			return; // already nopped
 
-      // the new vtable
-      auto new_vtable = new void * [3];
-      memcpy(new_vtable, vtable, sizeof(void * ) * 3);
-      new_vtable[1] = Pointers.Nullsub;
-
-      // assign it
-      * reinterpret_cast < void ** * > (element) = new_vtable;
-    }
-
-    // clean up (memory leak fix)
-    static void CleanupGameSkeletonElement(rage::gameSkeletonUpdateElement * element) {
-      auto vtable = * reinterpret_cast < void ** * > (element);
-      // check
-      if (vtable && vtable[1] == Pointers.Nullsub) {
-        delete[] vtable;
-        // could also use vtablepool
-      }
-    }
+		auto new_vtable = new void*[3];
+		memcpy(new_vtable, vtable, sizeof(void*) * 3);
+		new_vtable[1] = Pointers.Nullsub;
+		*reinterpret_cast<void***>(element) = new_vtable;
+	}
 
 	static void DefuseSigscanner()
 	{
@@ -113,7 +103,7 @@ namespace YimMenu
 	void AnticheatBypass::RunScriptImpl()
 	{
 		DefuseSigscanner();
-		
+
 		NativeHooks::AddHook("shop_controller"_J, NativeIndex::NET_GAMESERVER_BEGIN_SERVICE, &TransactionHook);
 
 		m_IsFSLLoaded = CheckForFSL();

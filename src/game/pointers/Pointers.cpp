@@ -467,6 +467,17 @@ namespace YimMenu
 			m_game_state = addr.Add(2).Rip().As<int*>();
 		});
 
+		constexpr auto gameDataHashPtrn = Pattern<"48 8D 3D ? ? ? ? 69 C9">("GameDataHash");
+		scanner.Add(gameDataHashPtrn, [this](PointerCalculator ptr) {
+			GameDataHash = ptr.Add(3).Rip().As<CGameDataHash*>();
+		});
+
+		constexpr auto getDLCHashPtrn = Pattern<"31 D2 E8 ? ? ? ? 3B 84">("GetDLCHash&DLCManager");
+		scanner.Add(getDLCHashPtrn, [this](PointerCalculator ptr) {
+			DLCManager = ptr.Sub(4).Rip().As<void**>();
+			GetDLCHash = ptr.Add(3).Rip().As<PVOID>();
+		});
+
 		if (!scanner.Scan())
 		{
 			LOG(FATAL) << "Some patterns could not be found, unloading.";

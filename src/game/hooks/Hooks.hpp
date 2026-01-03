@@ -88,6 +88,7 @@ namespace YimMenu::Hooks
 		extern void ReceiveNetGameEvent(Player player, uint16_t event_id, uint32_t event_index, uint32_t event_handled_bits, rage::datBitBuffer& buffer);
 		extern bool HandleScriptedGameEvent(Player player, CScriptedGameEvent& event);
 		extern int GetPoolType();
+		extern uint32_t GetDLCHash(void* manager, uint32_t seed);
 	}
 
 	namespace Window
@@ -100,5 +101,7 @@ namespace YimMenu::Hooks
 		extern bool AssistedAimShouldReleaseEntity(__int64 a1);
 		extern const char* GetLabelText(void* unk, const char* label);
 		extern const char* GetLabelTextInternal(void* this_, uint32_t label_hash);
+		const char* GetLabelTextInternal(void* this_, uint32_t label_hash);
+
 	}
 }

@@ -44,6 +44,7 @@ class CNetShopTransaction;
 class CNetworkSession;
 class CStatsMpCharacterMappingData;
 class CAnticheatContext;
+class CGameDataHash;
 
 namespace YimMenu
 {
@@ -171,6 +172,9 @@ namespace YimMenu
 		PVOID GetLabelTextInternal;
         uint32_t* m_frame_count{};
         int* m_game_state = nullptr;
+        CGameDataHash* GameDataHash;
+        void** DLCManager;
+        PVOID GetDLCHash;
 	};
 
 	struct Pointers : PointerData
