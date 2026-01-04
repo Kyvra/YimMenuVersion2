@@ -23,6 +23,7 @@ namespace YimMenu::Submenus
 		auto missions = std::make_shared<Group>("Missions");
 		auto ceoGroup = std::make_shared<Group>("SecuroServ");
 		auto achievements = std::make_shared<Group>("Unlock Achievements");
+		auto cooldown = std::make_shared<Group>("Cooldown");
 
 		auto generalGroup = std::make_shared<Group>("General");
 		auto gunvanGroup = std::make_shared<Group>("Gun Van");
@@ -61,6 +62,14 @@ namespace YimMenu::Submenus
 		businessGroup->AddItem(std::make_shared<ListCommandItem>("businesssafe"_J));
 		businessGroup->AddItem(std::make_shared<CommandItem>("claimsafeearnings"_J));
 		businessGroup->AddItem(std::make_shared<BoolCommandItem>("mansion_business_boost"_J));
+		businessGroup->AddItem(std::make_shared<CommandItem>("club_popularity"_J));
+		businessGroup->AddItem(std::make_shared<CommandItem>("club_payout"_J));
+		businessGroup->AddItem(std::make_shared<CommandItem>("bail_agent1"_J));
+		businessGroup->AddItem(std::make_shared<CommandItem>("bail_agent2"_J));
+		businessGroup->AddItem(std::make_shared<CommandItem>("carwash"_J));
+		businessGroup->AddItem(std::make_shared<CommandItem>("smokewater"_J));
+		businessGroup->AddItem(std::make_shared<CommandItem>("helitours"_J));
+		businessGroup->AddItem(std::make_shared<CommandItem>("salvageyard"_J));
     
 		casinoSlots->AddItem(std::make_shared<BoolCommandItem>("casinomanipulaterigslotmachines"_J));
 		
@@ -77,6 +86,7 @@ namespace YimMenu::Submenus
 		skip->AddItem(std::make_shared<CommandItem>("SkipDrDreeContract"_J));
 		skip->AddItem(std::make_shared<CommandItem>("SkipJenetteTheMutette"_J));
 		skip->AddItem(std::make_shared<CommandItem>("SkipCluckinBellRaid"_J));
+		skip->AddItem(std::make_shared<CommandItem>("SkipOscargunzmanflies"_J));
 
 		trophies->AddItem(std::make_shared<CommandItem>("unlockallmansiontrophies"_J));
 
@@ -101,12 +111,17 @@ namespace YimMenu::Submenus
 
 		achievements->AddItem(std::make_shared<CommandItem>("unlock_achievements"_J));
 
+		cooldown->AddItem(std::make_shared<CommandItem>("reset_casino_cd"_J));
+		cooldown->AddItem(std::make_shared<CommandItem>("reset_vehicle_sell_cd"_J));
+
 		main->AddItem(generalGroup);
 		main->AddItem(gunvanGroup);
 		main->AddItem(requestServices);
 		main->AddItem(missions);
 		main->AddItem(ceoGroup);
 		main->AddItem(achievements);
+		main->AddItem(cooldown);
+		
 		businesses->AddItem(businessGroup);
 		casino->AddItem(casinoSlots);
 		unlocks->AddItem(generalUnlocks);
