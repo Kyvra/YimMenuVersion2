@@ -157,7 +157,7 @@ namespace YimMenu
 		PVOID BattlEyeServerProcessPlayerJoin;
 		PVOID AssistedAimShouldReleaseEntity;
 		Functions::AssistedAimFindNewTarget AssistedAimFindNewTarget;
-		rage::gameSkeleton* GameSkeleton;
+		PVOID GameSkeletonUpdate;
 		PVOID Nullsub;
 		rage::Obf32** AnticheatInitializedHash;
 		PVOID GetAnticheatInitializedHash;
