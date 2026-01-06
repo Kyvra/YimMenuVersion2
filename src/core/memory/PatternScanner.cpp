@@ -46,7 +46,6 @@ namespace YimMenu
 
 		return scanSuccess;
 	}
-
 	bool PatternScanner::ScanInternal(const IPattern* pattern, PatternFunc func) const
 	{
 		const auto signature = pattern->Signature();
@@ -56,12 +55,11 @@ namespace YimMenu
 			auto offset = PatternCache::GetCachedOffset(pattern->Hash().Update(m_Module->Size()));
 			if (offset.has_value())
 			{
-				LOGF(INFO, "Using cached pattern [{}] : [{:X}] [Hash(): {:X}]", pattern->Name(), m_Module->Base() + offset.value(), pattern->Hash().Update(m_Module->Size()).m_Hash);
+				LOG(INFO) << "Using cached pattern: [" << pattern->Name() << "]";
 				std::invoke(func, m_Module->Base() + offset.value());
 				return true;
 			}
 		}
-
 		for (auto i = m_Module->Base(); i < m_Module->End(); ++i)
 		{
 			if (signature.size() + i > m_Module->End())
@@ -69,18 +67,19 @@ namespace YimMenu
 
 			const auto instruction = reinterpret_cast<std::uint8_t*>(i);
 			bool found = true;
+
 			for (std::size_t instructionIdx = 0; instructionIdx < signature.size(); ++instructionIdx)
 			{
 				if (signature[instructionIdx] && signature[instructionIdx].value() != instruction[instructionIdx])
 				{
 					found = false;
+					break;
 				}
 			}
 
 			if (found)
 			{
-				LOG(INFO) << "Found pattern [" << pattern->Name() << "] : [" << HEX(i) << "]";
-
+				LOG(INFO) << "Pattern found: [" << pattern->Name() << "]";
 				std::invoke(func, i);
 
 				if (PatternCache::IsInitialized())
@@ -92,7 +91,8 @@ namespace YimMenu
 			}
 		}
 
-		LOG(WARNING) << "Failed to find pattern [" << pattern->Name() << "]";
+		LOG(WARNING) << "Failed to find pattern: [" << pattern->Name() << "]";
 		return false;
 	}
+
 }
