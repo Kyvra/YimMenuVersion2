@@ -11,7 +11,6 @@ namespace YimMenu
 			static CustomLabelText instance;
 			return instance;
 		}
-
 	public:
 		static uint64_t ComputeHash(const char* str)
 		{
@@ -42,14 +41,13 @@ namespace YimMenu
 		{
 			return GetInstance().GetTextImpl(label);
 		}
-
 	private:
 		bool AddLabelImpl(joaat_t hash, const std::string_view text);
 		bool AddLabelImpl(joaat_t hash, CustomLabelText_t&& cb);
 
 		void InitImpl();
 
-		template<typename T>
+		 template<typename T>
 		const char* GetTextImpl(const T& label) const
 		{
 			uint64_t hash;
