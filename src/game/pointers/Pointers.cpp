@@ -1,3 +1,4 @@
+
 #include "Pointers.hpp"
 
 #include "core/backend/PatternCache.hpp"
@@ -173,10 +174,10 @@ namespace YimMenu
 			RequestControl = ptr.Add(5).Add(1).Rip().As<Functions::RequestControl>();
 		});
 
-	   constexpr auto spectatePatchPtrn = Pattern<"74 ? 66 83 FF 0D">("SpectatePatch");
-	    scanner.Add(spectatePatchPtrn, [this](PointerCalculator ptr) {
-	    SpectatePatch = BytePatches::Add(ptr.As<std::uint8_t*>(), 0xEB);
-	    });
+		constexpr auto spectatePatchPtrn = Pattern<"74 ? 66 83 FF 0D">("SpectatePatch");
+		scanner.Add(spectatePatchPtrn, [this](PointerCalculator ptr) {
+			SpectatePatch = BytePatches::Add(ptr.As<std::uint8_t*>(), 0xEB);
+		});
 		constexpr auto modelSpawnBypassPtrn = Pattern<"E8 ? ? ? ? 48 8B 78 48">("ModelSpawnBypass");
 		scanner.Add(modelSpawnBypassPtrn, [this](PointerCalculator ptr) {
 			ModelSpawnBypass = BytePatches::Add(ptr.Add(1).Rip().Add(0x2B).As<std::uint8_t*>(), 0xEB);
@@ -376,10 +377,6 @@ namespace YimMenu
 		});
 
 
-	
-
-
-
 		constexpr auto statsMpCharacterMappingDataPtrn = Pattern<"48 8D 0D ? ? ? ? 89 F2 0F 28 74 24 ? 48 83 C4 38">("CStatsMpCharacterMappingData");
 		scanner.Add(statsMpCharacterMappingDataPtrn, [this](PointerCalculator ptr) {
 			StatsMpCharacterMappingData = ptr.Add(3).Rip().As<CStatsMpCharacterMappingData*>();
@@ -457,6 +454,12 @@ namespace YimMenu
 			GetLabelTextInternal = addr.Add(36).Rip().As<PVOID>();
 		});
 
+		/*	static constexpr auto getLabelTextPtrn = Pattern<"56 48 83 EC 20 48 85 D2 74 25 0F B6 02 A8 DF 74 23 48 89 CE 48 89 D1 31 D2 E8 ? ? ? ? 48 89 F1 89 C2 E8 ? ? ? ?">("GetLabelText&GetLabelTextInternal");
+		scanner.Add(getLabelTextPtrn, [this](PointerCalculator addr) {
+			GetLabelText = addr.As<PVOID>();
+			GetLabelTextInternal = addr.Add(36).Rip().As<PVOID>();
+		});*/
+
 		static constexpr auto FrameCountPtrn = Pattern<"8B 15 ? ? ? ? FF C2">("FrameCount");
 		scanner.Add(FrameCountPtrn, [this](PointerCalculator addr) {
 			m_frame_count = addr.Add(2).Rip().As<uint32_t*>();
@@ -498,19 +501,19 @@ namespace YimMenu
 			const char* name = "Unknown";
 			switch (gs)
 			{
-				case 0: name = "SystemInit"; break;
-				case 1: name = "GameInit"; break;
-				case 2: name = "LoadingSP"; break;
-				case 3: name = "PlayingSP"; break;
-				case 4: name = "LoadingMP"; break;
-				case 5: name = "PlayingMP"; break;
-				}
+			case 0: name = "SystemInit"; break;
+			case 1: name = "GameInit"; break;
+			case 2: name = "LoadingSP"; break;
+			case 3: name = "PlayingSP"; break;
+			case 4: name = "LoadingMP"; break;
+			case 5: name = "PlayingMP"; break;
+			}
 			LOG(INFO) << "GameState = " << gs << " (" << name << ")";
-			}
-		    else
-			{
-				LOG(WARNING) << "GameState pointer is NULL!";
-			}
+		}
+		else
+		{
+			LOG(WARNING) << "GameState pointer is NULL!";
+		}
 		PatternCache::Update();
 		return true;
 	}
