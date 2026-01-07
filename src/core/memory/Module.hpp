@@ -1,3 +1,4 @@
+
 #pragma once
 #include "PointerCalculator.hpp"
 #include "common.hpp"
@@ -45,7 +46,8 @@ namespace YimMenu
 		 * @return true If the function is exported
 		 * @return false If the function is not exported
 		 */
-		[[nodiscard]] bool IsExported(const std::string_view symbolName) const;
+		[[nodiscard]]
+		bool IsExported(const std::string_view symbolName) const;
 		/**
 		 * @brief Checks if the module exports a function with the given ordinal
 		 * 
@@ -53,7 +55,8 @@ namespace YimMenu
 		 * @return true If the function is exported
 		 * @return false If the function is not exported
 		 */
-		[[nodiscard]] bool IsExported(const int ordinal) const;
+		[[nodiscard]]
+		bool IsExported(const int ordinal) const;
 		/**
 		 * @brief Gets the address of the import function
 		 * 
