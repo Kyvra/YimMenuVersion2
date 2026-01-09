@@ -8,7 +8,7 @@
 namespace YimMenu::Submenus
 {
 	Recovery::Recovery() :
-		#define ICON_FA_SACK_DOLLAR "\xef\x93\x80"
+#define ICON_FA_SACK_DOLLAR "\xef\x93\x80"
 	    Submenu::Submenu("Recovery", ICON_FA_SACK_DOLLAR)
 	{
 		auto main = std::make_shared<Category>("Main");
@@ -85,7 +85,7 @@ namespace YimMenu::Submenus
 
 
 		casinoSlots->AddItem(std::make_shared<BoolCommandItem>("casinomanipulaterigslotmachines"_J));
-		
+
 		generalUnlocks->AddItem(std::make_shared<CommandItem>("unlockallcareerprogress"_J));
 		generalUnlocks->AddItem(std::make_shared<CommandItem>("resetcareerprogress"_J));
 		generalUnlocks->AddItem(std::make_shared<CommandItem>("unlockalltattoos"_J));
@@ -95,8 +95,6 @@ namespace YimMenu::Submenus
 		generalUnlocks->AddItem(std::make_shared<CommandItem>("unlock_packed_bools"_J));
 		generalUnlocks->AddItem(std::make_shared<CommandItem>("unlock_misc"_J));
 		generalUnlocks->AddItem(std::make_shared<CommandItem>("enable_hidden_liveries"_J));
-		generalUnlocks->AddItem(std::make_shared<CommandItem>("all_Collectibles"_J));
-
 
 		skip->AddItem(std::make_shared<CommandItem>("SkipDrDreeContract"_J));
 		skip->AddItem(std::make_shared<CommandItem>("SkipJenetteTheMutette"_J));
@@ -118,7 +116,7 @@ namespace YimMenu::Submenus
 		Unreleased->AddItem(std::make_shared<CommandItem>("Unreleased_content"_J));
 		Unreleased->AddItem(std::make_shared<ListCommandItem>("luckyclover_location"_J));
 		Unreleased->AddItem(std::make_shared<CommandItem>("teleport_luckyclover"_J));
- 
+
 		missions->AddItem(std::make_shared<CommandItem>("alien_egg_mission"_J));
 
 		ceoGroup->AddItem(std::make_shared<CommandItem>("Become_CEO"_J));
@@ -129,7 +127,7 @@ namespace YimMenu::Submenus
 		cooldown->AddItem(std::make_shared<CommandItem>("reset_casino_cd"_J));
 		cooldown->AddItem(std::make_shared<CommandItem>("reset_vehicle_sell_cd"_J));
 		cooldown->AddItem(std::make_shared<CommandItem>("Reset_vehicle_Delivery_cd"_J));
-		
+
 
 		main->AddItem(generalGroup);
 		main->AddItem(gunvanGroup);
@@ -138,7 +136,7 @@ namespace YimMenu::Submenus
 		main->AddItem(ceoGroup);
 		main->AddItem(achievements);
 		main->AddItem(cooldown);
-		
+
 		businesses->AddItem(businessGroup);
 		businesses->AddItem(Bailloffice);
 		businesses->AddItem(Misc_business);
@@ -149,7 +147,7 @@ namespace YimMenu::Submenus
 		unlocks->AddItem(trophies);
 		unlocks->AddItem(skip);
 		unlocks->AddItem(Unreleased);
-		
+
 		AddCategory(std::move(main));
 		AddCategory(std::move(businesses));
 		AddCategory(std::move(casino));
