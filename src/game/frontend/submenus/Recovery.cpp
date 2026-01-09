@@ -28,6 +28,10 @@ namespace YimMenu::Submenus
 		auto generalGroup = std::make_shared<Group>("General");
 		auto gunvanGroup = std::make_shared<Group>("Gun Van");
 		auto businessGroup = std::make_shared<Group>("General");
+		auto Bailloffice = std::make_shared<Group>("Bail Office");
+		auto Misc_business = std::make_shared<Group>("Misc");
+
+
 		auto casinoSlots = std::make_shared<Group>("Slot Machines");
 		//auto casinoWheel = std::make_shared<Group>("Lucky Wheel");
 		//auto casinoBlackJack = std::make_shared<Group>("Blackjack");
@@ -61,16 +65,25 @@ namespace YimMenu::Submenus
 
 		businessGroup->AddItem(std::make_shared<ListCommandItem>("businesssafe"_J));
 		businessGroup->AddItem(std::make_shared<CommandItem>("claimsafeearnings"_J));
-		businessGroup->AddItem(std::make_shared<BoolCommandItem>("mansion_business_boost"_J));
-		businessGroup->AddItem(std::make_shared<CommandItem>("club_popularity"_J));
-		businessGroup->AddItem(std::make_shared<CommandItem>("club_payout"_J));
-		businessGroup->AddItem(std::make_shared<CommandItem>("bail_agent1"_J));
-		businessGroup->AddItem(std::make_shared<CommandItem>("bail_agent2"_J));
-		businessGroup->AddItem(std::make_shared<CommandItem>("carwash"_J));
-		businessGroup->AddItem(std::make_shared<CommandItem>("smokewater"_J));
-		businessGroup->AddItem(std::make_shared<CommandItem>("helitours"_J));
-		businessGroup->AddItem(std::make_shared<CommandItem>("salvageyard"_J));
-    
+
+		Bailloffice->AddItem(std::make_shared<ListCommandItem>("bailtarget"_J));
+		Bailloffice->AddItem(std::make_shared<CommandItem>("baildeliver"_J));
+		Bailloffice->AddItem(std::make_shared<CommandItem>("bailsecure"_J));
+		Bailloffice->AddItem(std::make_shared<CommandItem>("baildeliver_mw"_J));
+		Bailloffice->AddItem(std::make_shared<CommandItem>("bailsecure_mw"_J));
+
+
+		Misc_business->AddItem(std::make_shared<BoolCommandItem>("mansion_business_boost"_J));
+		Misc_business->AddItem(std::make_shared<CommandItem>("club_popularity"_J));
+		Misc_business->AddItem(std::make_shared<CommandItem>("club_payout"_J));
+		Misc_business->AddItem(std::make_shared<CommandItem>("bail_agent1"_J));
+		Misc_business->AddItem(std::make_shared<CommandItem>("bail_agent2"_J));
+		Misc_business->AddItem(std::make_shared<CommandItem>("carwash"_J));
+		Misc_business->AddItem(std::make_shared<CommandItem>("smokewater"_J));
+		Misc_business->AddItem(std::make_shared<CommandItem>("helitours"_J));
+		Misc_business->AddItem(std::make_shared<CommandItem>("salvageyard"_J));
+
+
 		casinoSlots->AddItem(std::make_shared<BoolCommandItem>("casinomanipulaterigslotmachines"_J));
 		
 		generalUnlocks->AddItem(std::make_shared<CommandItem>("unlockallcareerprogress"_J));
@@ -82,12 +95,13 @@ namespace YimMenu::Submenus
 		generalUnlocks->AddItem(std::make_shared<CommandItem>("unlock_packed_bools"_J));
 		generalUnlocks->AddItem(std::make_shared<CommandItem>("unlock_misc"_J));
 		generalUnlocks->AddItem(std::make_shared<CommandItem>("enable_hidden_liveries"_J));
+		generalUnlocks->AddItem(std::make_shared<CommandItem>("all_Collectibles"_J));
+
 
 		skip->AddItem(std::make_shared<CommandItem>("SkipDrDreeContract"_J));
 		skip->AddItem(std::make_shared<CommandItem>("SkipJenetteTheMutette"_J));
 		skip->AddItem(std::make_shared<CommandItem>("SkipCluckinBellRaid"_J));
 		skip->AddItem(std::make_shared<CommandItem>("SkipOscargunzmanflies"_J));
-		skip->AddItem(std::make_shared<CommandItem>("KnoWayOutPrepsSkip"_J));
 
 		trophies->AddItem(std::make_shared<CommandItem>("unlockallmansiontrophies"_J));
 
@@ -115,6 +129,7 @@ namespace YimMenu::Submenus
 		cooldown->AddItem(std::make_shared<CommandItem>("reset_casino_cd"_J));
 		cooldown->AddItem(std::make_shared<CommandItem>("reset_vehicle_sell_cd"_J));
 		cooldown->AddItem(std::make_shared<CommandItem>("Reset_vehicle_Delivery_cd"_J));
+		
 
 		main->AddItem(generalGroup);
 		main->AddItem(gunvanGroup);
@@ -123,7 +138,12 @@ namespace YimMenu::Submenus
 		main->AddItem(ceoGroup);
 		main->AddItem(achievements);
 		main->AddItem(cooldown);
+		
 		businesses->AddItem(businessGroup);
+		businesses->AddItem(Bailloffice);
+		businesses->AddItem(Misc_business);
+
+
 		casino->AddItem(casinoSlots);
 		unlocks->AddItem(generalUnlocks);
 		unlocks->AddItem(trophies);
