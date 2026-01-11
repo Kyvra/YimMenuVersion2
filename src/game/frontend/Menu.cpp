@@ -255,6 +255,58 @@ namespace YimMenu
 			colors[ImGuiCol_HeaderActive] = {1, 0, 0, 1};
 			colors[ImGuiCol_CheckMark] = {1, 0, 0, 1};
 		}
+
+		else if (theme == 4) // GERMANY STYLE
+		{
+			style.Alpha = 1.f;
+			style.WindowRounding = 6.f;
+			style.FrameRounding = 5.f;
+			style.PopupRounding = 4.f;
+			style.ScrollbarRounding = 6.f;
+			style.GrabRounding = 5.f;
+			style.ScrollbarSize = 14.f;
+			style.WindowPadding = {8, 8};
+			style.FramePadding = {5, 4};
+			style.ItemSpacing = {8, 6};
+			style.ItemInnerSpacing = {6, 4};
+
+			// Black / Red / Gold
+			colors[ImGuiCol_Text] = {1.f, 1.f, 1.f, 1.f};
+			colors[ImGuiCol_WindowBg] = {0.05f, 0.05f, 0.05f, 1.f}; // Black
+			colors[ImGuiCol_Button] = {0.75f, 0.0f, 0.0f, 0.6f};    // Red
+			colors[ImGuiCol_ButtonHovered] = {0.85f, 0.1f, 0.1f, 0.9f};
+			colors[ImGuiCol_ButtonActive] = {1.0f, 0.15f, 0.15f, 1.f};
+			colors[ImGuiCol_Header] = {0.9f, 0.75f, 0.0f, 0.5f}; // Gold
+			colors[ImGuiCol_HeaderHovered] = {1.0f, 0.85f, 0.1f, 0.8f};
+			colors[ImGuiCol_HeaderActive] = {1.0f, 0.9f, 0.2f, 1.f};
+			colors[ImGuiCol_CheckMark] = {1.0f, 0.85f, 0.2f, 1.f}; // Gold
+		}
+
+		else if (theme == 5) // RUSSIAN STYLE
+		{
+			style.Alpha = 1.f;
+			style.WindowRounding = 6.f;
+			style.FrameRounding = 5.f;
+			style.PopupRounding = 4.f;
+			style.ScrollbarRounding = 6.f;
+			style.GrabRounding = 5.f;
+			style.ScrollbarSize = 14.f;
+			style.WindowPadding = {8, 8};
+			style.FramePadding = {5, 4};
+			style.ItemSpacing = {8, 6};
+			style.ItemInnerSpacing = {6, 4};
+
+			// White / Blue / Red
+			colors[ImGuiCol_Text] = {1.f, 1.f, 1.f, 1.f};           // White text
+			colors[ImGuiCol_WindowBg] = {0.06f, 0.07f, 0.09f, 1.f}; // Dark background
+			colors[ImGuiCol_Button] = {0.0f, 0.35f, 0.75f, 0.6f};   // Blue
+			colors[ImGuiCol_ButtonHovered] = {0.1f, 0.45f, 0.85f, 0.9f};
+			colors[ImGuiCol_ButtonActive] = {0.2f, 0.55f, 1.0f, 1.f};
+			colors[ImGuiCol_Header] = {0.75f, 0.0f, 0.0f, 0.5f}; // Red
+			colors[ImGuiCol_HeaderHovered] = {0.85f, 0.1f, 0.1f, 0.8f};
+			colors[ImGuiCol_HeaderActive] = {1.0f, 0.15f, 0.15f, 1.f};
+			colors[ImGuiCol_CheckMark] = {1.0f, 1.0f, 1.0f, 1.f}; // White
+		}
 	}
 
 	static void DrawRainbowTextCentered(const char* text, float font_scale)
@@ -368,7 +420,9 @@ namespace YimMenu
 		    "Gold Style",
 		    "USA Style",
 		    "Dark Style",
-		    "Canadian Style"};
+		    "Canadian Style",
+		    "RUSSIAN STYLE",
+		    "GERMANY STYLE"};
 
 		ImVec2 comboSize = ImGui::CalcTextSize(themes[g_SelectedTheme]);
 		ImGui::SetCursorPosX((ImGui::GetWindowSize().x - comboSize.x - 275) * 0.5f);
