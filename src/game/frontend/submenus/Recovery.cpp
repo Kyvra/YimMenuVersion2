@@ -122,6 +122,9 @@ namespace YimMenu::Submenus
 		Safehouseinhills->AddItem(std::make_shared<CommandItem>("enable_halloween_dlc"_J));
 		Safehouseinhills->AddItem(std::make_shared<CommandItem>("enable_independence_dlc"_J));
 		Safehouseinhills->AddItem(std::make_shared<CommandItem>("enable_christmas_dlc"_J));
+		Safehouseinhills->AddItem(std::make_shared<CommandItem>("enable_new_years_gifts"_J));
+		Safehouseinhills->AddItem(std::make_shared<CommandItem>("enable_valentines_day"_J));
+		Safehouseinhills->AddItem(std::make_shared<CommandItem>("enable_limited_items"_J));
 
 		missions->AddItem(std::make_shared<CommandItem>("alien_egg_mission"_J));
 
