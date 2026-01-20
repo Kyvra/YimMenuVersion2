@@ -14,7 +14,14 @@ namespace YimMenu
 	{
 		return Pointers.ScriptThreads && Pointers.ScriptThreads->size() != 0;
 	}
-
+	auto start_time{ std::chrono::high_resolution_clock::now() };
+	std::string get_milisecond_results(int mil) {
+		if (mil < 1000) return "Really good!";
+		else if (mil > 1000 && mil < 1500) return "Good";
+		else if (mil > 1500 && mil < 2500) return "Average";
+		else if (mil > 2500 && mil < 4000) return "Decent";
+		else if (mil > 4000) return "Bad";
+	}
 	bool Pointers::Init()
 	{
 		PatternCache::Init();
@@ -443,10 +450,27 @@ namespace YimMenu
 			MatchmakingUnadvertise = addr.Sub(0xC).Rip().As<PVOID>();
 		});
 
+		static constexpr auto doMatchmakingFindSessions = Pattern<"4C 89 5C 24 20 E8 ? ? ? ? 84 C0 74 ? C7 47">("MatchmakingFindSessions");
+		scanner.Add(doMatchmakingFindSessions, [this](PointerCalculator addr) {
+			MatchmakingFindSessions = addr.Add(6).Rip().As<PVOID>();
+		});
+
+		static constexpr auto matchmakingFindSessionsResponse = Pattern<"4C 89 CE 49 89 CE">("MatchmakingFindSessionsResponse");
+		scanner.Add(matchmakingFindSessionsResponse, [this](PointerCalculator addr) {
+			MatchmakingFindSessionsResponse = addr.Sub(0x1B).As<PVOID>();
+		});
+
+
 		static constexpr auto matchmakingSessionDetailSendResponsePtrn = Pattern<"48 B8 01 00 00 00 0D 00 00 00">("SessionDetailSendResponse");
 		scanner.Add(matchmakingSessionDetailSendResponsePtrn, [this](PointerCalculator addr) {
 			MatchmakingSessionDetailSendResponse = addr.Add(0x2F).Rip().As<PVOID>();
 		});
+
+		static constexpr auto encodeSessionInfoPtrn = Pattern<"E8 ? ? ? ? 48 85 C0 74 ? 48 89 BC">("EncodeSessionInfo");
+		scanner.Add(encodeSessionInfoPtrn, [this](PointerCalculator addr) {
+			EncodeSessionInfo = addr.Add(1).Rip().As<Functions::EncodeSessionInfo>();
+		});
+
 
 		/*	static constexpr auto getLabelTextPtrn = Pattern<"56 48 83 EC 20 48 85 D2 74 25 0F B6 02 A8 DF 74 23 48 89 CE 48 89 D1 31 D2 E8 ? ? ? ? 48 89 F1 89 C2 E8 ? ? ? ?">("GetLabelText&GetLabelTextInternal");
 		scanner.Add(getLabelTextPtrn, [this](PointerCalculator addr) {
@@ -490,6 +514,7 @@ namespace YimMenu
 			DLCManager = ptr.Sub(4).Rip().As<void**>();
 			GetDLCHash = ptr.Add(3).Rip().As<PVOID>();
 		});
+
 
 		if (!scanner.Scan())
 		{
@@ -578,7 +603,16 @@ namespace YimMenu
 			LOG(WARNING) << "Some socialclub patterns could not be found";
 			return false;
 		}
-
+		auto end_time{ std::chrono::high_resolution_clock::now() }; 
+		auto elapsed_time{ std::chrono::duration_cast<std::chrono::milliseconds>(end_time - start_time).count() };
+		if (g_failed_sig_count > 0)
+		{
+			LOG(WARNING) << "Scanning finished with issues | Time: " << elapsed_time << "ms (" << get_milisecond_results(elapsed_time) << "), Found " << g_found_sig_count << "/" << g_total_sig_count << ", Failed " << g_failed_sig_count;
+	    }
+		else
+	    {
+			LOG(INFO) << "Scanning done! | Time taken: " << elapsed_time << "ms (" << get_milisecond_results(elapsed_time) << "), Found " << g_found_sig_count << "/" << g_total_sig_count;
+		}
 		PatternCache::Update();
 		return true;
 	}
