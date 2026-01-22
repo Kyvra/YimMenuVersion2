@@ -20,4 +20,3 @@ namespace YimMenu::Features
 
 	static MegaJump _MegaJump{"megajump", "Mega Jump", "Jump Super High"};
 }
-
