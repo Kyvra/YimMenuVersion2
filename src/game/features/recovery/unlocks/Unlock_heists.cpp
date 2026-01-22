@@ -4,7 +4,6 @@
 #include "game/gta/Stats.hpp"
 #include "core/backend/FiberPool.hpp"
 
-
 namespace YimMenu::Features
 {
 	class CompleteWSameCrew : public Command
@@ -29,5 +28,3 @@ namespace YimMenu::Features
 	    "Complete all heists with the same crew",
 	    "Complete all heists with the same crew"};
 	}
-
-
