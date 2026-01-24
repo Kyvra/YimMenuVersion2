@@ -30,6 +30,7 @@ namespace YimMenu::Submenus
 		auto businessGroup = std::make_shared<Group>("Business");
 		auto Bailloffice = std::make_shared<Group>("Bail Office");
 		auto Misc_business = std::make_shared<Group>("Misc");
+		auto over_lay = std::make_shared<Group>("Overlay");
 
 		auto casinoSlots = std::make_shared<Group>("Slot Machines");
 		//auto casinoWheel = std::make_shared<Group>("Lucky Wheel");
@@ -37,6 +38,7 @@ namespace YimMenu::Submenus
 		//auto casinoRoulette = std::make_shared<Group>("Roulette");
 
 		generalGroup->AddItem(std::make_shared<BoolCommandItem>("playallmissionssolo"_J));
+		generalGroup->AddItem(std::make_shared<BoolCommandItem>("businessoverlay"_J));
 		generalGroup->AddItem(std::make_shared<BoolCommandItem>("unlockgtaplus"_J));
 		generalGroup->AddItem(std::make_shared<BoolCommandItem>("overriderpmultiplier"_J));
 		generalGroup->AddItem(std::make_shared<ConditionalItem>("overriderpmultiplier"_J, std::make_shared<FloatCommandItem>("rpmultiplierinput"_J)));
@@ -65,6 +67,12 @@ namespace YimMenu::Submenus
 
 		businessGroup->AddItem(std::make_shared<ListCommandItem>("businesssafe"_J));
 		businessGroup->AddItem(std::make_shared<CommandItem>("claimsafeearnings"_J));
+
+		over_lay->AddItem(std::make_shared<BoolCommandItem>("businessoverlay"_J));
+		over_lay->AddItem(std::make_shared<ConditionalItem>("businessoverlay"_J, std::make_shared<BoolCommandItem>("showwarehouse"_J)));
+		over_lay->AddItem(std::make_shared<ConditionalItem>("businessoverlay"_J, std::make_shared<BoolCommandItem>("showhangar"_J)));
+		over_lay->AddItem(std::make_shared<ConditionalItem>("businessoverlay"_J, std::make_shared<BoolCommandItem>("showbusinesses"_J)));
+		over_lay->AddItem(std::make_shared<ConditionalItem>("businessoverlay"_J, std::make_shared<BoolCommandItem>("shownightclub"_J)));
 
 		Bailloffice->AddItem(std::make_shared<ListCommandItem>("bailtarget"_J));
 		Bailloffice->AddItem(std::make_shared<CommandItem>("baildeliver"_J));
@@ -150,6 +158,7 @@ namespace YimMenu::Submenus
 		businesses->AddItem(businessGroup);
 		businesses->AddItem(Bailloffice);
 		businesses->AddItem(Misc_business);
+		businesses->AddItem(over_lay);
 
 		casino->AddItem(casinoSlots);
 		unlocks->AddItem(generalUnlocks);

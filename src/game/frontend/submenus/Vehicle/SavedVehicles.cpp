@@ -135,7 +135,7 @@ namespace YimMenu::Submenus
 					    isJson ? "[JSON] " + pair :
 					             pair;
 
-					if (ImGui::Selectable(display.c_str(), file == pair, ImGuiSelectableFlags_AllowItemOverlap))
+					if (ImGui::Selectable(display.c_str(), file == pair, ImGuiSelectableFlags_AllowOverlap))
 					{
 						file = pair;
 						open_modal = true;

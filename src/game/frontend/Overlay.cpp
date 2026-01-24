@@ -7,6 +7,7 @@
 
 namespace YimMenu::Features
 {
+    void DrawBusinessOverlay();
 	BoolCommand _OverlayEnabled("overlay", "Overlay Enabled", "Show an info overlay at the top left corner of the screen");
 	BoolCommand _OverlayShowFPS("overlayfps", "Overlay Show FPS", "Show frame rate in the info overlay");
 }
@@ -27,6 +28,7 @@ namespace YimMenu
 
 		if (Features::_OverlayShowFPS.GetState())
 			ImGui::Text("FPS: %d", (int)(ImGui::GetIO().Framerate));
+		 Features::DrawBusinessOverlay();
 
 		ImGui::PopFont();
 		ImGui::PopStyleColor();
